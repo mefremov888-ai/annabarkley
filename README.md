@@ -61,52 +61,51 @@
 
 ## Roadmap
 
-### Фаза 0 — Допиливание прототипа (сейчас)
+### Фаза 0 — Допиливание прототипа
 
 Цель: рабочий прототип без блокеров запуска. После — выбор стека и миграция.
 
-#### P0 — Срочные фиксы (применяются в этой итерации)
+#### ✅ Применено (коммиты `51e5802`, `<P1-commit>`)
 
 | # | Тип | Файл | Описание |
 |---|-----|------|----------|
-| D1 | Bug | tool-body-map.html | Добавить `<div id="zones">` — без него Мира не отрисовывает зоны |
-| D2 | Bug | tool-body-map.html | Удалить shell-мусор после `</html>` |
-| D3 | Bug | anna-barkley-complete.html | Локализовать мобильное меню `#mm` при `setLang()` |
-| D4 | Bug | tool-burnout-test.html | Добавить `--sagem` в `:root` |
-| D5 | Bug | tool-breathing.html | Добавить `--gold` в `:root` |
-| C1 | DHA | anna-barkley-complete.html, tool-anxiety-test.html | Заменить нарушающие формулировки ("very treatable", "highly effective", "responds very well", "meaningful improvement", "treatment", "Healing means…") |
-| A3 | Org | / | Создать `index.html` в корне с редиректом на прототип |
-| A4 | Compliance | anna-barkley-complete.html | Заменить `[TO BE INSERTED]` на видимые HTML-маркеры с CI-стопом |
+| D1 | Bug | tool-body-map.html | Добавлен `<div id="zones">` — Мира теперь рисует зоны |
+| D2 | Bug | tool-body-map.html | Удалён shell-мусор (PART3, echo) после `</html>` |
+| D3 | Bug | anna-barkley-complete.html | Мобильное меню `#mm` локализуется при setLang (массив `nm` + рендер в render()) |
+| D4 | Bug | tool-burnout-test.html | Добавлено `--sagem` в `:root` |
+| D5 | Bug | tool-breathing.html | Добавлено `--gold` в `:root` |
+| D7 | Bug | tool-mood-diary.html | localStorage в try/catch для Safari Private |
+| D8 | Bug | anna-barkley-complete.html | uP() null-checks для pe.r1...pe.x2 |
+| D9 | Bug | anna-barkley-complete.html | Изменён порядок: render() сначала с fallback rates, потом fetchRates+rerender |
+| D10 | Bug | anna-barkley-complete.html | goTo() валидация имени роута, `console.warn` на неизвестные |
+| C1 | DHA | 2 файла | Заменены DHA-нарушения: "very treatable", "highly effective", "responds very well", "meaningful improvement", "Healing means…" — на support-language. RU-аналоги тоже |
+| C7 | Compliance | anna-barkley-complete.html | Cookie banner: Accept all + Reject optional, статус в localStorage, текст про процессоров (GA, Calendly, Google Fonts, WhatsApp), GA4 загружается через `loadAnalytics()` только после accept |
+| C8 | A11y | anna-barkley-complete.html | Контраст --txm #8A8A80→#6E6E66 (WCAG AA); focus-visible стили; skip-link; prefers-reduced-motion обёртка; aria-hidden для декоративных слоёв; aria-label/aria-expanded/aria-controls для menu; tabindex+keyboard для logo; main role; label[for] и required на форме контакта |
+| C10 | UX | anna-barkley-complete.html | Тестимониал David K. переписан с общей фразы про разные возрасты на отзыв взрослого экспата о собственной терапии (EN+RU) |
+| C3 | UX (частично) | anna-barkley-complete.html | Lead magnet — рабочая `<form>` с validation, mailto fallback (или fetch к FORMS_ENDPOINT если задан) |
+| C4 | UX (частично) | anna-barkley-complete.html | Contact form — рабочая `<form>` с required, autocomplete, типизированными полями, mailto fallback, success-state с aria-live |
+| C6 | Compliance (частично) | anna-barkley-complete.html | Parent consent чек-бокс показывается при выборе My child/My teenager; required; готов к серверной валидации |
+| A3 | Org | / | Создан `index.html` в корне (редирект + dev warning) |
+| A4 | Compliance | anna-barkley-complete.html | `[TO BE INSERTED]` заменён на видимый красный CI-маркер `BLOCK_LAUNCH:DHA_LICENSE` |
+| A1 | Refactor | assets/js/config.js + 8 HTML | Создан `assets/js/config.js` с WA/EMAIL/PHONE/DHA_LICENSE/HOURS/EXCHANGE_API. Подключён во все 8 HTML. Все хардкоды WA-номера заменены на `AB_CONFIG.WA_URL` |
+| P2-кэш | Perf | anna-barkley-complete.html | Кэш курсов валют в localStorage с TTL 24ч |
+| P2-eol | Org | / | Создан `.gitattributes` (LF EOL для текстов, binary для медиа) |
+| P2-docx | Org | / | `инструкция.docx` перенесена из исходников в `docs/` |
+| Telegram | Bug | anna-barkley-complete.html | Telegram-кнопка получила реальный onclick (открывает `AB_CONFIG.TELEGRAM_URL`) |
 
-#### P1 — Перед запуском (следующие итерации)
+#### ⏸ Отложено и почему
 
-| # | Тип | Описание | Усилие |
-|---|-----|----------|--------|
-| A1 | Refactor | Вынести WA/EMAIL/PHONE/DHA_LICENSE в `assets/js/config.js`, общий для всех 8 HTML | M |
-| A2 | Org | Перенести проект из `старт проекта/` в корень репо (кириллица + пробел ломает CI) | M |
-| C2 | SEO | SPA→MPA: расщепить `anna-barkley-complete.html` на 14 отдельных HTML-страниц + 12 issue-страниц для SEO | L |
-| C3 | UX | Подключить Lead Magnet к Resend/Formspree, добавить валидацию | S |
-| C4 | UX | Подключить Contact Form к бэкенду, валидация, required, success/error states | S |
-| C5 | Compliance | Telehealth consent flow перед записью на онлайн-сессию (DHA Telehealth Standards) | M |
-| C6 | Compliance | Parent consent чек-бокс при выборе "My child"/"My teenager" | S |
-| C7 | Compliance | Cookie banner: добавить Reject + Settings, блокировать GA4 до consent, перечислить процессоров (Calendly, GA4, Google Fonts, WhatsApp, Resend) в Privacy | M |
-| C8 | A11y | aria-label на иконочные кнопки, focus-visible для tab-навигации, контраст text-muted #8A8A80 → #6E6E66, prefers-reduced-motion обёртка над анимациями, label[for] на формах, lang="" обновлять при setLang | M |
-| C10 | UX | Hero для ICP A: альтернативный subheadline для взрослых экспатов или Smart Hero, тестимониал от взрослого |  S |
-| D6 | Bug | submitForm: реальный POST на бэкенд | S |
-| D7 | Bug | tool-mood-diary.html: localStorage в try/catch для Safari Private | XS |
-| D8 | Bug | uP() null-checks для pe.r1...pe.x2 | XS |
-| D9 | Bug | render() вызывается дважды на load — оставить один вызов | XS |
-| D10 | Bug | goTo() валидация имени роута | XS |
-
-#### P2 — Бэклог (после запуска)
-
-- Legal в отдельные HTML с двумя `<div lang="">`
-- Lazy-load Mira SVG в tool-body-map.html
-- Кэш курсов валют в localStorage с TTL
-- `.gitattributes` для кросс-платформенных EOL
-- Удалить `инструкция.docx` из репо
-- prefers-reduced-motion для curtain и custom cursor
-- `tools/` подпапка с общим shell
+| # | Тип | Причина | Что нужно от тебя |
+|---|-----|---------|-------------------|
+| **A2** | Org | Переезд из `старт проекта/` в корень — рискованная операция, может сломать ссылки в HTML-прототипе и `t.file`-ссылки на инструменты. Лучше делать в отдельной сессии вместе с разделением SPA на отдельные страницы (C2). | Подтверждение, что готов сделать «миграцию структуры» одним блоком |
+| **C2** | SEO | SPA→MPA расщепление 14+12 страниц — это **большая работа** (несколько часов) и **архитектурное решение**: либо так, либо сразу Next.js/Astro. Делать сейчас руками = потом всё равно переделывать в Next.js. | Решение про финальный стек: **Next.js** (по техспеке) / **Astro** (легче) / **продолжить статикой с разделением на файлы** |
+| **C3 / C4 (полная интеграция)** | UX | Mailto-fallback работает, но для middle-premium практики нужен полноценный transactional flow с подтверждением и хранением заявок. | API-ключ Formspree (`https://formspree.io/f/xxxx`) или Resend API key + endpoint URL — впишутся в `AB_CONFIG.FORMS_ENDPOINT` |
+| **C5** | Compliance | Telehealth consent flow требует **одобренного юристом UAE текста согласия** (DHA Telehealth Standards) и решения, на каком этапе показывать — отдельный экран или чек-бокс в форме онлайн-сессии. | Текст telehealth-согласия от юриста + flow-решение (отдельный шаг или inline) |
+| **C6 (продолжение)** | Compliance | Чек-бокс уже работает в UI, но юр. формулировка минимальная. Полная версия требует **согласованного текста parent consent** (UAE-специфика). | Финальный текст согласия от юриста |
+| **DHA license номер** | Compliance | `BLOCK_LAUNCH:DHA_LICENSE` маркер блокирует деплой пока номер не вставлен. | Реальный DHA license number + Classification (Clinical / Counselling) |
+| **Реальные контакты** | Org | WA/EMAIL/PHONE/Domain — все плейсхолдеры. | Реальные значения для замены в `assets/js/config.js` |
+| **Lazy-load Mira SVG** | Perf | tool-body-map.html — 235 КБ из-за data-URI картинки Миры. Lazy-load даст ~Lighthouse +10. | — Применимо самостоятельно в следующую итерацию, не блокер |
+| **Хардкод email/phone/Schema.org JSON-LD** | Refactor | В Schema.org внутри `<script type="application/ld+json">` (строка 12) старый номер. JSON не поддерживает выражения — заменим, когда придут реальные значения. | — Применимо вручную в одну строку при замене реквизитов |
 
 ### Фаза 1 — Контент и медиа (1-2 недели)
 

@@ -65,6 +65,7 @@ h1{font-family:var(--fh);font-size:clamp(1.5rem,3.5vw,2rem);font-weight:300;colo
 
 .tip{font-size:13px;color:var(--txm);font-weight:300;line-height:1.6;max-width:380px;margin:20px auto 0;padding:16px;border-radius:14px;background:rgba(0,0,0,.02)}
 </style>
+<script src="assets/js/config.js"></script>
 </head>
 <body>
 <div class="bgo"><div style="width:400px;height:400px;background:rgba(124,154,124,.15);left:10%;top:20%"></div><div style="width:350px;height:350px;background:rgba(234,199,199,.15);right:5%;bottom:10%;animation-delay:-8s"></div></div>
@@ -211,7 +212,7 @@ document.getElementById('cyc').textContent='';
 document.getElementById('tip').textContent=$.tipDone;
 ['p1','p2','p3'].forEach(id=>document.getElementById(id).classList.remove('on'));
 document.getElementById('ring').classList.remove('on');
-document.getElementById('btns').innerHTML=`<button class="btn btn-p" onclick="startB()">${$.again}</button><button class="btn btn-s" style="margin-top:10px;background:#25D366;color:#fff;border-color:#25D366" onclick="window.open('https://wa.me/971551234567','_blank')">${lang==='en'?'Talk to a therapist':'Написать терапевту'}</button>`;
+document.getElementById('btns').innerHTML=`<button class="btn btn-p" onclick="startB()">${$.again}</button><button class="btn btn-s" style="margin-top:10px;background:#25D366;color:#fff;border-color:#25D366" onclick="window.open(AB_CONFIG.WA_URL,'_blank')">${lang==='en'?'Talk to a therapist':'Написать терапевту'}</button>`;
 }
 
 renderUI();
