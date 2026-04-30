@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5-4-3-2-1 Grounding — Anna Barkley</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F5F2;--sage:#7C9A7C;--saged:#5B7A5B;--sagep:#E8EFE8;--rose:#EAC7C7;--rosed:#D4A9A9;--rosep:#F5E6E6;--ch:#1A1A1A;--tx:#3B3B3B;--txm:#8A8A80;--wh:#FFFFFF;--brd:#E8E4DC;--fh:'Sora',system-ui,sans-serif;--fb:'Plus Jakarta Sans',system-ui,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);font-family:var(--fb);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.bgo{position:fixed;inset:0;pointer-events:none}.bgo div{position:absolute;border-radius:50%;filter:blur(80px);opacity:.15;animation:fl 25s ease-in-out infinite alternate}
+@keyframes fl{0%{transform:translate(0,0)}50%{transform:translate(20px,-30px)}100%{transform:translate(-20px,10px)}}
+.ct{text-align:center;padding:24px;position:relative;z-index:1;width:100%;max-width:520px}
+.hdr{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:36px}
+.lic{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--sage),var(--rosed));display:flex;align-items:center;justify-content:center}
+.lic svg{width:16px;height:16px;color:#fff}
+.hdr span{font-family:var(--fh);font-size:15px;color:var(--ch)}
+.lang{display:flex;gap:2px;background:rgba(0,0,0,.04);border-radius:20px;padding:2px;margin-left:12px}
+.lang button{font-family:var(--fb);font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;border:none;cursor:pointer;transition:all .3s;color:var(--txm);background:transparent}
+.lang button.ac{color:var(--wh);background:var(--sage)}
+
+h1{font-family:var(--fh);font-size:clamp(1.6rem,4vw,2.2rem);font-weight:300;color:var(--ch);letter-spacing:-.02em;margin-bottom:8px}
+.sub{font-size:14px;color:var(--txm);line-height:1.7;font-weight:300;margin-bottom:36px}
+
+/* Step display */
+.step-num{font-family:var(--fh);font-size:100px;font-weight:200;color:var(--sage);line-height:1;margin-bottom:8px;opacity:.3;transition:all 1s}
+.step-num.ac{opacity:1}
+.step-sense{font-family:var(--fh);font-size:clamp(1.2rem,3vw,1.6rem);font-weight:400;color:var(--ch);margin-bottom:8px;animation:si .6s ease}
+@keyframes si{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.step-mira{font-size:15px;color:var(--txm);line-height:1.8;font-weight:300;margin-bottom:32px;max-width:400px;margin-left:auto;margin-right:auto;font-style:italic;animation:si .6s ease}
+
+/* Progress dots */
+.dots{display:flex;justify-content:center;gap:12px;margin-bottom:32px}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--brd);transition:all .5s}
+.dot.done{background:var(--sage)}.dot.cur{background:var(--sage);transform:scale(1.3);box-shadow:0 0 12px rgba(124,154,124,.3)}
+
+/* Input area */
+.inputs{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto}
+.inp{font-family:var(--fb);font-size:14px;padding:14px 18px;border:1.5px solid var(--brd);border-radius:14px;background:var(--wh);color:var(--tx);outline:none;transition:border-color .3s}
+.inp:focus{border-color:var(--sage)}
+.inp::placeholder{color:var(--brd)}
+.filled{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;background:var(--sagep);font-size:13px;color:var(--sage);font-weight:400}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--fb);font-size:15px;font-weight:600;padding:16px 40px;border-radius:60px;border:none;cursor:pointer;transition:all .4s}
+.btn-p{background:linear-gradient(135deg,var(--sage),var(--saged));color:var(--wh);box-shadow:0 4px 20px rgba(124,154,124,.3)}
+.btn-p:hover{transform:translateY(-2px)}
+.btn-o{background:transparent;color:var(--txm);border:1.5px solid var(--brd);margin-top:10px}
+.tip{font-size:13px;color:var(--txm);font-weight:300;line-height:1.6;max-width:400px;margin:20px auto 0;padding:16px;border-radius:14px;background:rgba(0,0,0,.02)}
+.done-ic{font-size:48px;margin-bottom:16px;color:var(--sage)}
+</style>
+</head>
+<body>
+<div class="bgo"><div style="width:400px;height:400px;background:rgba(124,154,124,.12);left:10%;top:20%"></div><div style="width:350px;height:350px;background:rgba(234,199,199,.12);right:5%;bottom:10%;animation-delay:-10s"></div></div>
+
+<div class="ct">
+<div class="hdr"><div class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 1 8-1.5 5-5.7 8.5-9 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div><span>Anna Barkley</span><div class="lang"><button class="ac" onclick="setL('en')">EN</button><button onclick="setL('ru')">RU</button></div></div>
+<div id="app"></div>
+</div>
+
+<script>
+const T={en:{
+title:'5-4-3-2-1 Grounding',sub:'A simple technique to bring you back to the present moment when anxiety rises.',
+start:'Begin',
+steps:[
+{n:5,sense:'things you can SEE',mira:'Look around slowly. Name 5 things you can see right now. A color on the wall. The light. A small detail you usually miss.',ph:['Something near you','Something far away','A color you notice','Something small','Something beautiful']},
+{n:4,sense:'things you can TOUCH',mira:'Now bring attention to your body. Name 4 things you can physically feel right now.',ph:['Your feet on the floor','Fabric on your skin','Temperature of the air','Something in your hands']},
+{n:3,sense:'things you can HEAR',mira:'Close your eyes if you want. What sounds are around you right now?',ph:['A distant sound','A close sound','A subtle sound']},
+{n:2,sense:'things you can SMELL',mira:'This one is quieter. What can you smell — or what do you imagine smelling?',ph:['Something nearby','Something you remember']},
+{n:1,sense:'thing you can TASTE',mira:'Finally. What do you taste right now? Even if it\'s just the inside of your mouth.',ph:['Right now...']}
+],
+done:'You\'re here.',doneP:'You made it back to the present moment. Notice how your body feels right now compared to when you started.',
+again:'Do it again',tip:'This technique works by engaging all five senses, which interrupts anxious thought patterns and anchors you in the present.',
+},ru:{
+title:'Заземление 5-4-3-2-1',sub:'Простая техника, чтобы вернуться в настоящий момент, когда тревога нарастает.',
+start:'Начать',
+steps:[
+{n:5,sense:'вещей, которые ты ВИДИШЬ',mira:'Осмотрись медленно. Назови 5 вещей, которые видишь прямо сейчас. Цвет на стене. Свет. Маленькая деталь, которую обычно не замечаешь.',ph:['Что-то рядом','Что-то далеко','Цвет, который замечаешь','Что-то маленькое','Что-то красивое']},
+{n:4,sense:'вещи, которые ты ОЩУЩАЕШЬ',mira:'Теперь внимание к телу. Назови 4 вещи, которые физически чувствуешь.',ph:['Стопы на полу','Ткань на коже','Температуру воздуха','Что-то в руках']},
+{n:3,sense:'звука, которые ты СЛЫШИШЬ',mira:'Можешь закрыть глаза. Какие звуки вокруг тебя?',ph:['Далёкий звук','Близкий звук','Тихий звук']},
+{n:2,sense:'запаха, которые ты ЧУВСТВУЕШЬ',mira:'Этот шаг тише. Что ты чувствуешь — или что представляешь?',ph:['Что-то рядом','Что-то из памяти']},
+{n:1,sense:'вкус прямо СЕЙЧАС',mira:'Наконец. Что ты чувствуешь на вкус? Даже если просто привкус во рту.',ph:['Прямо сейчас...']}
+],
+done:'Ты здесь.',doneP:'Ты вернулся в настоящий момент. Замечай, как ощущается тело сейчас — по сравнению с началом.',
+again:'Ещё раз',tip:'Техника задействует все пять чувств, что прерывает тревожные мысли и заземляет в настоящем.',
+}};
+
+let lang='en',step=-1,items=[];
+function d(){return T[lang]}
+function setL(l){lang=l;step=-1;items=[];document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('ac',b.textContent===l.toUpperCase()));R()}
+
+function R(){
+const $=d(),app=document.getElementById('app');
+// Intro
+if(step===-1){
+  app.innerHTML=`<h1>${$.title}</h1><p class="sub">${$.sub}</p><div class="dots">${$.steps.map((_,i)=>`<div class="dot"></div>`).join('')}</div><button class="btn btn-p" onclick="go()">${$.start}</button><div class="tip">${$.tip}</div>`;return}
+// Done
+if(step>=$.steps.length){
+  app.innerHTML=`<div class="done-ic">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg></div>
+<h1>${$.done}</h1><p class="sub" style="margin-bottom:24px">${$.doneP}</p><button class="btn btn-p" onclick="step=-1;items=[];R()">${$.again}</button><button class="btn btn-o" style="margin-top:10px;background:#25D366;color:#fff;border-color:#25D366" onclick="window.open('https://wa.me/971551234567','_blank')">${lang==='en'?'Talk to a therapist':'Написать терапевту'}</button>`;return}
+// Active step
+const s=$.steps[step];
+const filled=items.length;
+const remaining=s.n-filled;
+app.innerHTML=`<div class="dots">${$.steps.map((_,i)=>`<div class="dot${i<step?' done':''}${i===step?' cur':''}"></div>`).join('')}</div>
+<div class="step-num ac">${s.n}</div>
+<div class="step-sense">${s.sense}</div>
+<div class="step-mira">"${s.mira}"</div>
+<div class="inputs">
+${items.map(it=>`<div class="filled"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>${it}</div>`).join('')}
+${remaining>0?`<input class="inp" id="inp" type="text" placeholder="${s.ph[filled]||'...'}" onkeydown="if(event.key==='Enter')addItem()" autofocus>`:''}</div>
+${remaining>0?`<button class="btn btn-p" onclick="addItem()">${lang==='en'?'Add':'Добавить'} (${remaining} ${lang==='en'?'left':'ещё'})</button>`:`<button class="btn btn-p" onclick="nextStep()">${lang==='en'?'Next sense':'Следующее чувство'} →</button>`}
+${filled>0&&remaining>0?`<button class="btn btn-o" onclick="nextStep()">${lang==='en'?'Skip to next':'Пропустить'}</button>`:''}`;
+if(remaining>0)setTimeout(()=>{const i=document.getElementById('inp');if(i)i.focus()},100);
+}
+
+function go(){step=0;items=[];R()}
+function addItem(){const i=document.getElementById('inp');if(!i||!i.value.trim())return;items.push(i.value.trim());const s=d().steps[step];if(items.length>=s.n)setTimeout(()=>R(),300);else R()}
+function nextStep(){step++;items=[];R()}
+
+R();
+</script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mood Diary — Anna Barkley</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F5F2;--sage:#7C9A7C;--saged:#5B7A5B;--sagep:#E8EFE8;--rose:#EAC7C7;--rosed:#D4A9A9;--rosep:#F5E6E6;--gold:#C4A265;--ch:#1A1A1A;--tx:#3B3B3B;--txm:#8A8A80;--wh:#FFFFFF;--brd:#E8E4DC;--fh:'Sora',system-ui,sans-serif;--fb:'Plus Jakarta Sans',system-ui,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);font-family:var(--fb);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased}
+.wrap{max-width:560px;margin:0 auto;padding:40px 24px 80px}
+.hdr{display:flex;align-items:center;gap:10px;margin-bottom:40px}
+.lic{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--sage),var(--rosed));display:flex;align-items:center;justify-content:center}
+.lic svg{width:18px;height:18px;color:#fff}
+.hdr>span{font-family:var(--fh);font-size:16px;color:var(--ch)}
+.lang{display:flex;gap:2px;background:rgba(0,0,0,.04);border-radius:20px;padding:2px;margin-left:auto}
+.lang button{font-family:var(--fb);font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;border:none;cursor:pointer;transition:all .3s;color:var(--txm);background:transparent}
+.lang button.ac{color:var(--wh);background:var(--sage)}
+h1{font-family:var(--fh);font-size:clamp(1.6rem,4vw,2rem);font-weight:300;color:var(--ch);letter-spacing:-.02em;margin-bottom:8px}
+.sub{font-size:14px;color:var(--txm);line-height:1.7;font-weight:300;margin-bottom:32px}
+.gl{width:60px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--sage),var(--rose));margin-bottom:20px}
+
+/* Mood selector */
+.moods{display:flex;gap:12px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+.mood{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:12px 16px;border-radius:16px;border:2px solid transparent;transition:all .3s;min-width:64px}
+.mood:hover{background:rgba(0,0,0,.02)}
+.mood.sel{border-color:var(--sage);background:var(--sagep)}
+.mood-face{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.mood:hover .mood-face{transform:scale(1.15)}
+.mood.sel .mood-face{transform:scale(1.2)}
+.mood-label{font-size:10px;font-weight:500;color:var(--txm);font-family:var(--fh)}
+.mood.sel .mood-label{color:var(--ch);font-weight:600}
+
+/* Input */
+.thought{width:100%;padding:16px 20px;border:1.5px solid var(--brd);border-radius:16px;background:var(--wh);font-family:var(--fb);font-size:14px;color:var(--tx);resize:none;outline:none;transition:border-color .3s;line-height:1.6}
+.thought:focus{border-color:var(--sage)}
+.thought::placeholder{color:var(--brd)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--fb);font-size:14px;font-weight:600;padding:14px 32px;border-radius:60px;border:none;cursor:pointer;transition:all .4s;width:100%;margin-top:16px}
+.btn-p{background:linear-gradient(135deg,var(--sage),var(--saged));color:var(--wh);box-shadow:0 4px 16px rgba(124,154,124,.25)}
+.btn-p:hover{transform:translateY(-2px)}
+.btn-p:disabled{opacity:.4;cursor:default;transform:none}
+
+/* History */
+.hist-title{font-family:var(--fh);font-size:16px;font-weight:400;color:var(--ch);margin:40px 0 16px}
+.week{display:flex;gap:6px;margin-bottom:24px}
+.day{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 4px;border-radius:12px;background:var(--wh);border:1px solid var(--brd)}
+.day-d{font-size:10px;color:var(--txm);font-weight:500;font-family:var(--fh)}
+.day-face{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.day-empty{width:24px;height:24px;border-radius:50%;border:1.5px dashed var(--brd)}
+
+.entry{padding:16px;border-radius:14px;background:var(--wh);border:1px solid var(--brd);margin-bottom:10px}
+.entry-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.entry-date{font-size:12px;color:var(--txm);font-weight:300}
+.entry-text{font-size:14px;color:var(--tx);line-height:1.6;font-weight:300}
+
+.insight{padding:20px;border-radius:16px;background:linear-gradient(135deg,var(--sagep),var(--rosep));margin-top:24px}
+.insight-t{font-family:var(--fh);font-size:13px;font-weight:600;color:var(--sage);margin-bottom:8px}
+.insight-p{font-size:14px;color:var(--tx);line-height:1.7;font-weight:300}
+.clear{font-size:12px;color:var(--txm);cursor:pointer;margin-top:16px;text-align:center;opacity:.5}
+.clear:hover{opacity:1;color:var(--rosed)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hdr"><div class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 1 8-1.5 5-5.7 8.5-9 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div><span>Anna Barkley</span><div class="lang"><button class="ac" onclick="setL('en')">EN</button><button onclick="setL('ru')">RU</button></div></div>
+<div id="app"></div>
+</div>
+<script>
+const MOODS=[
+  {id:'great',color:'#A8D5A2',face:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>'},
+  {id:'good',color:'#7C9A7C',face:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 13s1 1.5 4 1.5 4-1.5 4-1.5"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>'},
+  {id:'okay',color:'#C4A265',face:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>'},
+  {id:'low',color:'#D4A9A9',face:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>'},
+  {id:'bad',color:'#D49A9A',face:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" y1="10" x2="10" y2="9"/><line x1="15" y1="10" x2="14" y2="9"/></svg>'},
+];
+
+const T={en:{
+title:'Mood Diary',sub:'Check in with yourself. How are you feeling right now?',
+labels:['Great','Good','Okay','Low','Difficult'],
+ph:'One thought, feeling, or observation... (optional)',
+save:'Save Entry',saved:'Saved',
+weekT:'This week',histT:'Recent entries',
+noData:'No entries yet. Start by logging how you feel today.',
+insightT:'Pattern noticed',
+insights:{
+  mostly_good:'You\'ve been feeling mostly positive lately. Keep noticing what contributes to these good days.',
+  mostly_low:'You\'ve had several difficult days recently. This pattern is worth paying attention to. Would talking to someone help?',
+  mixed:'Your mood has been fluctuating. This is normal, but tracking what triggers the shifts can reveal important patterns.',
+  improving:'Your mood seems to be improving over the last few days. Notice what changed.',
+  declining:'There\'s been a gradual shift downward. This might be a signal worth listening to.',
+},
+clear:'Clear all entries',days:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+},ru:{
+title:'Дневник настроения',sub:'Отметь, как ты себя чувствуешь прямо сейчас.',
+labels:['Отлично','Хорошо','Нормально','Низко','Тяжело'],
+ph:'Одна мысль, чувство или наблюдение... (необязательно)',
+save:'Сохранить',saved:'Сохранено',
+weekT:'Эта неделя',histT:'Последние записи',
+noData:'Записей пока нет. Начни с того, как ты себя чувствуешь сегодня.',
+insightT:'Замечен паттерн',
+insights:{
+  mostly_good:'В последнее время ты чувствуешь себя в основном хорошо. Замечай, что этому способствует.',
+  mostly_low:'Было несколько трудных дней. На этот паттерн стоит обратить внимание. Поможет ли разговор?',
+  mixed:'Настроение колеблется. Это нормально, но отслеживание триггеров может раскрыть важные паттерны.',
+  improving:'Настроение улучшается за последние дни. Замечай, что изменилось.',
+  declining:'Постепенный сдвиг вниз. Это может быть сигнал, к которому стоит прислушаться.',
+},
+clear:'Очистить всё',days:['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+}};
+
+let lang='en',selMood=null;
+const $=()=>T[lang];
+
+function setL(l){lang=l;selMood=null;document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('ac',b.textContent===l.toUpperCase()));R()}
+
+function getEntries(){try{return JSON.parse(localStorage.getItem('mood_diary')||'[]')}catch(e){return[]}}
+function saveEntry(mood,text){
+  const entries=getEntries();
+  entries.unshift({mood,text,date:new Date().toISOString()});
+  if(entries.length>60)entries.length=60;
+  localStorage.setItem('mood_diary',JSON.stringify(entries));
+}
+
+function R(){
+const s=$(),entries=getEntries();
+const today=new Date().toDateString();
+const todayDone=entries.some(e=>new Date(e.date).toDateString()===today);
+
+let html=`<h1>${s.title}</h1><div class="gl"></div><p class="sub">${s.sub}</p>`;
+
+if(!todayDone){
+  // Mood selector
+  html+=`<div class="moods">${MOODS.map((m,i)=>`<div class="mood${selMood===i?' sel':''}" onclick="selMood=${i};R()"><div class="mood-face" style="color:${m.color}">${m.face}</div><div class="mood-label">${s.labels[i]}</div></div>`).join('')}</div>`;
+  html+=`<textarea class="thought" id="thought" rows="3" placeholder="${s.ph}"></textarea>`;
+  html+=`<button class="btn btn-p" ${selMood===null?'disabled':''} onclick="doSave()">${s.save}</button>`;
+} else {
+  html+=`<div style="text-align:center;padding:24px;background:var(--sagep);border-radius:16px;margin-bottom:24px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round" style="margin-bottom:8px"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg><p style="font-size:14px;color:var(--sage);font-weight:500">${s.saved}</p></div>`;
+}
+
+// Week view
+if(entries.length>0){
+  html+=`<div class="hist-title">${s.weekT}</div><div class="week">`;
+  const now=new Date();
+  for(let i=6;i>=0;i--){
+    const d=new Date(now);d.setDate(d.getDate()-i);
+    const ds=d.toDateString();
+    const entry=entries.find(e=>new Date(e.date).toDateString()===ds);
+    const dayName=s.days[d.getDay()];
+    if(entry){
+      const m=MOODS.find(x=>x.id===entry.mood);
+      html+=`<div class="day"><div class="day-d">${dayName}</div><div class="day-face" style="color:${m?m.color:'var(--txm)'}">${m?m.face:''}</div></div>`;
+    } else {
+      html+=`<div class="day"><div class="day-d">${dayName}</div><div class="day-empty"></div></div>`;
+    }
+  }
+  html+=`</div>`;
+
+  // Insight
+  const last7=entries.filter(e=>{const d=new Date(e.date);return(now-d)<7*86400000});
+  if(last7.length>=3){
+    const avg=last7.reduce((a,e)=>a+MOODS.findIndex(m=>m.id===e.mood),0)/last7.length;
+    let insight='mixed';
+    if(avg<=1.2)insight='mostly_good';
+    else if(avg>=3)insight='mostly_low';
+    else{
+      const recent=last7.slice(0,3).reduce((a,e)=>a+MOODS.findIndex(m=>m.id===e.mood),0)/3;
+      const older=last7.slice(-3).reduce((a,e)=>a+MOODS.findIndex(m=>m.id===e.mood),0)/3;
+      if(recent<older-0.5)insight='improving';
+      else if(recent>older+0.5)insight='declining';
+    }
+    html+=`<div class="insight"><div class="insight-t">${s.insightT}</div><div class="insight-p">${s.insights[insight]}</div><button style="display:block;width:100%;margin-top:12px;padding:10px;border-radius:50px;border:none;background:#25D366;color:#fff;font-family:var(--fb);font-size:12px;font-weight:600;cursor:pointer" onclick="window.open('https://wa.me/971551234567','_blank')">${lang==='en'?'Discuss with a therapist':'Обсудить с терапевтом'}</button></div>`;
+  }
+
+  // Recent entries
+  html+=`<div class="hist-title">${s.histT}</div>`;
+  entries.slice(0,7).forEach(e=>{
+    const m=MOODS.find(x=>x.id===e.mood);
+    const d=new Date(e.date);
+    const dateStr=d.toLocaleDateString(lang==='ru'?'ru-RU':'en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+    html+=`<div class="entry"><div class="entry-top"><div style="width:20px;height:20px;color:${m?m.color:'var(--txm)'}">${m?m.face:''}</div><span style="font-size:12px;font-weight:500;color:${m?m.color:'var(--txm)'}">${s.labels[MOODS.indexOf(m)]||''}</span><span class="entry-date">${dateStr}</span></div>${e.text?`<div class="entry-text">${e.text}</div>`:''}</div>`;
+  });
+
+  html+=`<div class="clear" onclick="if(confirm('${lang==='en'?'Clear all entries?':'Очистить все записи?'}')){localStorage.removeItem('mood_diary');R()}">${s.clear}</div>`;
+} else {
+  html+=`<p style="text-align:center;color:var(--txm);font-size:14px;font-weight:300;margin-top:40px">${s.noData}</p>`;
+}
+
+document.getElementById('app').innerHTML=html;
+}
+
+function doSave(){
+  if(selMood===null)return;
+  const text=document.getElementById('thought')?.value?.trim()||'';
+  saveEntry(MOODS[selMood].id,text);
+  selMood=null;
+  R();
+}
+
+R();
+</script>
+</body>
+</html>

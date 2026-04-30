@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emotion Wheel — Anna Barkley</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F5F2;--sage:#7C9A7C;--saged:#5B7A5B;--sagep:#E8EFE8;--rose:#EAC7C7;--rosed:#D4A9A9;--rosep:#F5E6E6;--ch:#1A1A1A;--tx:#3B3B3B;--txm:#8A8A80;--wh:#FFFFFF;--brd:#E8E4DC;--fh:'Sora',system-ui,sans-serif;--fb:'Plus Jakarta Sans',system-ui,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);font-family:var(--fb);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased}
+body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.022;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{max-width:1000px;margin:0 auto;padding:40px 24px 80px}
+.hdr{display:flex;align-items:center;gap:10px;margin-bottom:40px}
+.lic{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--sage),var(--rosed));display:flex;align-items:center;justify-content:center}
+.lic svg{width:18px;height:18px;color:#fff}
+.hdr span{font-family:var(--fh);font-size:16px;color:var(--ch)}
+.lang{display:flex;gap:2px;background:rgba(0,0,0,.04);border-radius:20px;padding:2px;margin-left:auto}
+.lang button{font-family:var(--fb);font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;border:none;cursor:pointer;transition:all .3s;color:var(--txm);background:transparent}
+.lang button.ac{color:var(--wh);background:var(--sage)}
+h1{font-family:var(--fh);font-size:clamp(1.8rem,4vw,2.4rem);font-weight:300;color:var(--ch);letter-spacing:-.02em;margin-bottom:8px;text-align:center}
+.sub{font-size:15px;color:var(--txm);line-height:1.7;font-weight:300;text-align:center;margin-bottom:48px;max-width:500px;margin-left:auto;margin-right:auto}
+.main{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+@media(max-width:768px){.main{grid-template-columns:1fr}}
+.wheel{position:relative;width:100%;max-width:420px;aspect-ratio:1;margin:0 auto}
+.wc{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:90px;height:90px;border-radius:50%;background:var(--bg);border:1.5px solid var(--brd);display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--fh);font-size:11px;color:var(--txm);line-height:1.4;z-index:2}
+.eb{position:absolute;width:105px;height:105px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;transition:all .4s cubic-bezier(.16,1,.3,1);border:2.5px solid transparent;z-index:1}
+.eb:hover{z-index:3;border-color:rgba(0,0,0,.15)}
+.eb.ac{z-index:3;border-color:var(--ch)}
+.eb .ei{width:24px;height:24px;line-height:1}
+.eb .en{font-family:var(--fh);font-size:10.5px;font-weight:500;color:var(--ch);text-align:center;line-height:1.2}
+.pnl{position:sticky;top:40px}
+.pnl-e{padding:80px 20px;text-align:center;color:var(--txm);font-size:15px;font-weight:300;border:1.5px dashed var(--brd);border-radius:24px}
+.pc{background:var(--wh);border-radius:24px;padding:36px;border:1px solid var(--brd);animation:pi .5s cubic-bezier(.16,1,.3,1)}
+@keyframes pi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.pc-c{width:48px;height:48px;border-radius:16px;margin-bottom:20px;display:flex;align-items:center;justify-content:center}.pc-c svg{width:22px;height:22px}
+.pc-n{font-family:var(--fh);font-size:clamp(1.3rem,3vw,1.7rem);font-weight:400;color:var(--ch);margin-bottom:4px}
+.pc-cat{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;display:inline-block;padding:4px 14px;border-radius:20px;margin-bottom:16px}
+.pc-d{font-size:15px;color:var(--txm);line-height:1.85;font-weight:300;margin-bottom:24px}
+.pc-s{margin-bottom:20px}
+.pc-st{font-family:var(--fh);font-size:13px;font-weight:600;color:var(--ch);margin-bottom:10px}
+.pc-i{display:flex;gap:10px;align-items:flex-start;padding:5px 0}
+.pc-dt{width:6px;height:6px;border-radius:50%;margin-top:7px;flex-shrink:0}
+.pc-i span{font-size:14px;color:var(--tx);line-height:1.6;font-weight:300}
+.pc-h{padding:20px;border-radius:16px;background:linear-gradient(135deg,var(--sagep),var(--rosep));margin-top:20px}
+.pc-ht{font-family:var(--fh);font-size:13px;font-weight:600;color:var(--sage);margin-bottom:8px}
+.pc-hp{font-size:14px;color:var(--tx);line-height:1.7;font-weight:300}
+.bwa{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:20px;font-family:var(--fb);font-size:14px;font-weight:600;padding:14px;border-radius:50px;border:none;cursor:pointer;background:#25D366;color:#fff;box-shadow:0 4px 16px rgba(37,211,102,.25);transition:all .3s}
+.bwa:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(37,211,102,.3)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hdr"><div class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 1 8-1.5 5-5.7 8.5-9 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div><span>Anna Barkley</span><div class="lang"><button class="ac" onclick="setL('en')">EN</button><button onclick="setL('ru')">RU</button></div></div>
+<h1 id="ttl"></h1><p class="sub" id="sub"></p>
+<div class="main"><div class="wheel" id="whl"></div><div class="pnl" id="pnl"></div></div>
+</div>
+<script>
+const WA='https://wa.me/971551234567';
+const ic=[
+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>',
+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"/><path d="M8 16h.01M8 20h.01M12 18h.01M12 22h.01M16 16h.01M16 20h.01"/></svg>',
+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>',
+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 3l1.5 5.5L19 10l-5.5 1.5L12 17l-1.5-5.5L5 10l5.5-1.5Z"/></svg>',
+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>',
+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>'
+];
+const D={en:{ttl:'Emotion Wheel',sub:'Click on any emotion to understand it better. Naming what you feel is the first step to feeling better.',ctr:'How do<br>you feel?',empty:'← Click on an emotion to explore it',bT:'How it feels in the body',nT:'When it\'s normal',hT:'When to seek support',wa:'Discuss with a therapist',
+e:[
+{n:'Joy',c:'Positive',cl:'#A8D5A2',d:'Joy signals that something meaningful is happening. It connects you to the present and what matters most.',b:['Warmth in chest','Lightness in body','Spontaneous smile','Increased energy'],nr:'Joy can be quiet or explosive. Feeling guilty about joy is common in hard times. All joy is valid.',h:'If you rarely feel joy, or it\'s quickly followed by guilt, therapy can help reconnect with positive experiences.'},
+{n:'Sadness',c:'Core',cl:'#89A4C7',d:'Sadness tells you something important has been lost. One of the most fundamental and most avoided emotions.',b:['Heaviness in chest','Low energy','Desire to withdraw','Tearfulness'],nr:'Sadness is not depression. Feeling sad after loss or disappointment is healthy and natural.',h:'If sadness persists over two weeks, interferes with daily life, or comes without clear reason — support helps.'},
+{n:'Fear',c:'Core',cl:'#C4B08B',d:'Fear is your brain\'s alarm system. It becomes a problem when it fires too often or too intensely.',b:['Racing heart','Shallow breathing','Muscle tension','Hypervigilance'],nr:'Fear before a big decision is normal. It shows you care about the outcome.',h:'If fear controls your decisions or causes panic attacks — CBT is highly effective.'},
+{n:'Anger',c:'Core',cl:'#D49A9A',d:'Anger signals a crossed boundary or unmet need. It\'s not "bad" — but expression matters enormously.',b:['Heat in face','Clenched jaw/fists','Raised voice','Urge to act now'],nr:'Anger at injustice is healthy. It protects your boundaries.',h:'If anger leads to regretted outbursts or damages relationships — therapy helps regulate it.'},
+{n:'Surprise',c:'Transitional',cl:'#C9B5D4',d:'Surprise resets your attention and prepares your brain for new information. Brief and intense.',b:['Widened eyes','Momentary freeze','Sharp breath','Heightened alertness'],nr:'Surprise is neutral — the shortest-lived emotion. Can lead to joy or fear.',h:'If constantly startled or hypervigilant — this could relate to anxiety or trauma.'},
+{n:'Disgust',c:'Protective',cl:'#9BB5A0',d:'Disgust protects you from physical threats and violations of your values.',b:['Nausea','Desire to pull away','Wrinkling nose','Sense of contamination'],nr:'Moral disgust shows intact values. Physical disgust protects the body.',h:'If disgust targets yourself — body, identity, or worth — this is worth exploring.'},
+{n:'Trust',c:'Relational',cl:'#A8BFA8',d:'Trust is the foundation of connection. Builds slowly through consistency and safety.',b:['Open posture','Body relaxation','Willingness to be vulnerable','Sense of safety'],nr:'Trust requires evidence. Caution with new people is wisdom, not weakness.',h:'If you can\'t trust anyone or trust too fast — therapy builds healthy discernment.'},
+{n:'Anticipation',c:'Forward',cl:'#D4C49A',d:'Your mind projecting into the future — with excitement or dread. Drives motivation and anxiety.',b:['Restlessness','Difficulty being present','"What if" thoughts','Excitement mixed with worry'],nr:'Looking forward and worrying about uncertainty is normal.',h:'If anticipation becomes chronic worry or disrupts sleep — support can help.'},
+]},ru:{ttl:'Колесо эмоций',sub:'Нажмите на эмоцию, чтобы узнать о ней больше. Назвать чувство — первый шаг к тому, чтобы стало легче.',ctr:'Что вы<br>чувствуете?',empty:'← Нажмите на эмоцию, чтобы изучить её',bT:'Как ощущается в теле',nT:'Когда это нормально',hT:'Когда стоит обратиться за поддержкой',wa:'Обсудить с терапевтом',
+e:[
+{n:'Радость',c:'Позитивная',cl:'#A8D5A2',d:'Радость — сигнал, что происходит значимое. Она связывает с настоящим и важным.',b:['Тепло в груди','Лёгкость в теле','Улыбка','Прилив энергии'],nr:'Радость бывает тихой и бурной. Вина за радость — частое явление. Любая радость настоящая.',h:'Если редко радуетесь или радость быстро сменяется виной — терапия поможет.'},
+{n:'Грусть',c:'Базовая',cl:'#89A4C7',d:'Грусть говорит, что что-то важное потеряно. Базовая и самая избегаемая эмоция.',b:['Тяжесть в груди','Низкая энергия','Желание уединиться','Слёзы'],nr:'Грусть — не депрессия. Грустить после потери — здорово и естественно.',h:'Если грусть длится более двух недель или мешает жить — стоит обратиться за помощью.'},
+{n:'Страх',c:'Базовая',cl:'#C4B08B',d:'Страх — система защиты мозга. Проблема — когда срабатывает слишком часто.',b:['Учащённое сердцебиение','Поверхностное дыхание','Напряжение мышц','Бдительность'],nr:'Страх перед важным решением — абсолютно нормален.',h:'Если страх управляет решениями или вызывает панику — КПТ эффективна.'},
+{n:'Злость',c:'Базовая',cl:'#D49A9A',d:'Злость — сигнал нарушенной границы. Не "плохая", но способ выражения решает всё.',b:['Жар в лице','Сжатые кулаки','Повышенный голос','Импульс действовать'],nr:'Злиться на несправедливость — здоровая реакция.',h:'Если злость приводит к вспышкам или разрушает отношения — терапия поможет.'},
+{n:'Удивление',c:'Переходная',cl:'#C9B5D4',d:'Удивление сбрасывает внимание и готовит мозг к новому. Короткая и интенсивная.',b:['Расширенные глаза','Замирание','Резкий вдох','Настороженность'],nr:'Удивление нейтрально. Самая короткая эмоция.',h:'Если постоянно настороже — это может быть связано с тревогой или травмой.'},
+{n:'Отвращение',c:'Защитная',cl:'#9BB5A0',d:'Отвращение защищает от физических угроз и нарушений ценностей.',b:['Тошнота','Желание отстраниться','Сморщенный нос','Ощущение загрязнения'],nr:'Моральное отвращение — признак живых ценностей.',h:'Если направлено на себя — тело, идентичность — стоит исследовать.'},
+{n:'Доверие',c:'Отношенческая',cl:'#A8BFA8',d:'Доверие — основа связи. Строится медленно через постоянство.',b:['Открытая поза','Расслабление','Готовность быть уязвимым','Безопасность'],nr:'Доверие требует доказательств. Осторожность — мудрость.',h:'Если невозможно никому доверять — терапия поможет.'},
+{n:'Предвкушение',c:'Перспективная',cl:'#D4C49A',d:'Проекция в будущее. Иногда с волнением, иногда с тревогой.',b:['Беспокойство','Трудности быть в моменте','Мысли "что если"','Волнение и тревога'],nr:'Ждать и волноваться — нормальная часть жизни.',h:'Если превращается в хроническую тревогу — поддержка поможет.'},
+]}};
+let lang='en',sel=null;
+function setL(l){lang=l;sel=null;document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('ac',b.textContent===l.toUpperCase()));R()}
+function R(){const $=D[lang];document.getElementById('ttl').textContent=$.ttl;document.getElementById('sub').textContent=$.sub;
+const n=$.e.length,w=document.getElementById('whl');
+let h=`<div class="wc">${$.ctr}</div>`;
+$.e.forEach((e,i)=>{const a=(i/n)*360-90,rad=a*Math.PI/180,r=38,x=50+r*Math.cos(rad),y=50+r*Math.sin(rad);
+h+=`<div class="eb${sel===i?' ac':''}" onclick="P(${i})" style="left:${x}%;top:${y}%;transform:translate(-50%,-50%)${sel===i?' scale(1.15)':''};background:${e.cl}33;border-color:${sel===i?e.cl:'transparent'}">`
++`<div class="ei" style="color:${e.cl}">${ic[i]}</div><div class="en">${e.n}</div></div>`});
+w.innerHTML=h;
+const p=document.getElementById('pnl');
+if(sel===null){p.innerHTML=`<div class="pnl-e">${$.empty}</div>`;return}
+const e=$.e[sel];
+p.innerHTML=`<div class="pc"><div class="pc-c" style="background:${e.cl}33;color:${e.cl}">${ic[sel]}</div><div class="pc-n">${e.n}</div><span class="pc-cat" style="color:${e.cl};background:${e.cl}18">${e.c}</span><p class="pc-d">${e.d}</p>`
++`<div class="pc-s"><div class="pc-st">${$.bT}</div>${e.b.map(b=>`<div class="pc-i"><div class="pc-dt" style="background:${e.cl}"></div><span>${b}</span></div>`).join('')}</div>`
++`<div class="pc-s"><div class="pc-st">${$.nT}</div><p style="font-size:14px;color:var(--tx);line-height:1.7;font-weight:300">${e.nr}</p></div>`
++`<div class="pc-h"><div class="pc-ht">${$.hT}</div><div class="pc-hp">${e.h}</div></div>`
++`<button class="bwa" onclick="window.open('${WA}?text=${encodeURIComponent(lang==='en'?"Hi, I'd like to discuss "+e.n.toLowerCase():"Здравствуйте! Хотела бы обсудить: "+e.n.toLowerCase())}','_blank')">${$.wa}</button></div>`}
+function P(i){sel=i;R()}
+R();
+</script>
+</body>
+</html>

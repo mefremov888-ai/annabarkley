@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Breathing Exercise — Anna Barkley</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F5F2;--sage:#7C9A7C;--saged:#5B7A5B;--sagem:#A8BFA8;--sagep:#E8EFE8;--rose:#EAC7C7;--rosed:#D4A9A9;--rosep:#F5E6E6;--ch:#1A1A1A;--tx:#3B3B3B;--txm:#8A8A80;--wh:#FFFFFF;--brd:#E8E4DC;--fh:'Sora',system-ui,sans-serif;--fb:'Plus Jakarta Sans',system-ui,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);font-family:var(--fb);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased;display:flex;align-items:center;justify-content:center;overflow:hidden}
+body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.022;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.bgo{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.bgo div{position:absolute;border-radius:50%;filter:blur(80px);opacity:.2;animation:fl 20s ease-in-out infinite alternate}
+@keyframes fl{0%{transform:translate(0,0)}50%{transform:translate(30px,-20px)}100%{transform:translate(-20px,15px)}}
+.ct{text-align:center;padding:24px;position:relative;z-index:1;width:100%;max-width:520px}
+.hdr{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:36px}
+.lic{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--sage),var(--rosed));display:flex;align-items:center;justify-content:center}
+.lic svg{width:16px;height:16px;color:#fff}
+.hdr span{font-family:var(--fh);font-size:15px;color:var(--ch)}
+.lang{display:flex;gap:2px;background:rgba(0,0,0,.04);border-radius:20px;padding:2px;margin-left:12px}
+.lang button{font-family:var(--fb);font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;border:none;cursor:pointer;transition:all .3s;color:var(--txm);background:transparent}
+.lang button.ac{color:var(--wh);background:var(--sage)}
+h1{font-family:var(--fh);font-size:clamp(1.5rem,3.5vw,2rem);font-weight:300;color:var(--ch);letter-spacing:-.02em;margin-bottom:6px}
+.sub{font-size:14px;color:var(--txm);line-height:1.6;font-weight:300;margin-bottom:32px}
+
+/* Technique cards */
+.techs{display:flex;flex-direction:column;gap:6px;margin-bottom:32px;max-width:400px;margin-left:auto;margin-right:auto}
+.tech{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1.5px solid var(--brd);border-radius:14px;background:var(--wh);cursor:pointer;transition:all .3s;text-align:left}
+.tech:hover{border-color:var(--sagem);background:rgba(232,239,232,.2)}
+.tech.ac{border-color:var(--sage);background:var(--sagep)}
+.tech-badge{font-family:var(--fh);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.tech-info{flex:1}
+.tech-name{font-family:var(--fh);font-size:14px;font-weight:500;color:var(--ch);margin-bottom:2px}
+.tech-desc{font-size:12px;color:var(--txm);font-weight:300}
+.tech-pattern{font-family:var(--fh);font-size:13px;color:var(--sage);font-weight:500;white-space:nowrap}
+
+/* Circle */
+.bw{position:relative;width:260px;height:260px;margin:0 auto 32px}
+.br{position:absolute;inset:0;border-radius:50%;border:2px solid var(--brd);transition:border-color .5s}
+.br.on{border-color:var(--sagem)}
+.bc{position:absolute;inset:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;will-change:transform}
+.bc.idle{transform:scale(.82);background:linear-gradient(135deg,rgba(124,154,124,.1),rgba(234,199,199,.1));transition:transform 1s,background 1s}
+.bc.inhale{background:linear-gradient(135deg,rgba(124,154,124,.22),rgba(234,199,199,.15));transform:scale(1)}
+.bc.hold{background:linear-gradient(135deg,rgba(124,154,124,.28),rgba(234,199,199,.22));transform:scale(1)}
+.bc.exhale{background:linear-gradient(135deg,rgba(124,154,124,.06),rgba(234,199,199,.06));transform:scale(.68)}
+.bt{font-family:var(--fh);font-size:clamp(16px,3.5vw,22px);font-weight:300;color:var(--ch);transition:opacity .3s}
+.bn{font-family:var(--fh);font-size:44px;font-weight:200;color:var(--sage);margin-top:2px;line-height:1;min-height:50px}
+
+/* Pulse */
+.pr{position:absolute;inset:-10px;border-radius:50%;border:1px solid var(--sagem);opacity:0}
+.pr.on{animation:po 4s ease-out infinite}
+.pr:nth-child(2).on{animation-delay:1.3s}
+.pr:nth-child(3).on{animation-delay:2.6s}
+@keyframes po{0%{transform:scale(.9);opacity:.25}100%{transform:scale(1.3);opacity:0}}
+
+.timer{font-family:var(--fh);font-size:13px;color:var(--txm);margin-bottom:4px;min-height:20px}
+.cyc{font-size:12px;color:var(--txm);font-weight:300;margin-bottom:28px;min-height:18px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--fb);font-size:15px;font-weight:600;padding:16px 40px;border-radius:60px;border:none;cursor:pointer;transition:all .4s cubic-bezier(.16,1,.3,1)}
+.btn-p{background:linear-gradient(135deg,var(--sage),var(--saged));color:var(--wh);box-shadow:0 4px 20px rgba(124,154,124,.3)}
+.btn-p:hover{box-shadow:0 12px 40px rgba(124,154,124,.4);transform:translateY(-2px)}
+.btn-s{background:transparent;color:var(--txm);border:1.5px solid var(--brd);margin-top:10px;padding:12px 32px}
+.btn-s:hover{border-color:var(--rosed);color:var(--rosed)}
+
+.tip{font-size:13px;color:var(--txm);font-weight:300;line-height:1.6;max-width:380px;margin:20px auto 0;padding:16px;border-radius:14px;background:rgba(0,0,0,.02)}
+</style>
+</head>
+<body>
+<div class="bgo"><div style="width:400px;height:400px;background:rgba(124,154,124,.15);left:10%;top:20%"></div><div style="width:350px;height:350px;background:rgba(234,199,199,.15);right:5%;bottom:10%;animation-delay:-8s"></div></div>
+
+<div class="ct">
+<div class="hdr"><div class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 1 8-1.5 5-5.7 8.5-9 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div><span>Anna Barkley</span><div class="lang"><button class="ac" onclick="setL('en')">EN</button><button onclick="setL('ru')">RU</button></div></div>
+
+<h1 id="ttl"></h1>
+<p class="sub" id="sub"></p>
+<div id="techList"></div>
+
+<div class="bw">
+  <div class="pr" id="p1"></div><div class="pr" id="p2"></div><div class="pr" id="p3"></div>
+  <div class="br" id="ring"><div class="bc idle" id="circ"><div class="bt" id="btx"></div><div class="bn" id="bcn"></div></div></div>
+</div>
+<div class="timer" id="tmr"></div>
+<div class="cyc" id="cyc"></div>
+<div id="btns"></div>
+<div class="tip" id="tip"></div>
+</div>
+
+<script>
+const T={en:{
+ttl:'Breathing Exercise',sub:'Choose a technique and follow the circle. Start gentle, build up over time.',
+start:'Start',stop:'Stop',again:'Start Again',ready:'Ready',
+inhale:'Breathe In',hold:'Hold',exhale:'Breathe Out',
+cycle:'Cycle',of:'of',done:'Complete',
+tip:'Find a comfortable position. You can close your eyes or soften your gaze.',
+tipDone:'Well done. Notice how your body feels right now.',
+techs:[
+{name:'Simple Calm',desc:'Easy start, no hold',pattern:'4 – 4',badge:'Beginner',badgeColor:'var(--sage)'},
+{name:'Square Breathing',desc:'Equal rhythm all sides',pattern:'4 – 4 – 4 – 4',badge:'Level 1',badgeColor:'var(--sage)'},
+{name:'4-7-8 Classic',desc:'The gold standard for calming',pattern:'4 – 7 – 8',badge:'Level 2',badgeColor:'var(--gold)'},
+{name:'Deep Calm',desc:'Extended hold and exhale',pattern:'5 – 9 – 10',badge:'Level 3',badgeColor:'var(--rosed)'},
+{name:'Advanced Reset',desc:'Maximum nervous system reset',pattern:'6 – 10 – 12',badge:'Advanced',badgeColor:'var(--rosed)'},
+],
+},ru:{
+ttl:'Дыхательное упражнение',sub:'Выберите технику и следуйте за кругом. Начните с простого, усложняйте со временем.',
+start:'Начать',stop:'Остановить',again:'Начать заново',ready:'Готово',
+inhale:'Вдох',hold:'Задержка',exhale:'Выдох',
+cycle:'Цикл',of:'из',done:'Завершено',
+tip:'Найдите удобное положение. Можете закрыть глаза или смягчить взгляд.',
+tipDone:'Отлично. Обратите внимание, как ощущается тело прямо сейчас.',
+techs:[
+{name:'Простое дыхание',desc:'Лёгкий старт, без задержки',pattern:'4 – 4',badge:'Начало',badgeColor:'var(--sage)'},
+{name:'Квадратное',desc:'Равный ритм со всех сторон',pattern:'4 – 4 – 4 – 4',badge:'Уровень 1',badgeColor:'var(--sage)'},
+{name:'4-7-8 Классика',desc:'Золотой стандарт успокоения',pattern:'4 – 7 – 8',badge:'Уровень 2',badgeColor:'var(--gold)'},
+{name:'Глубокое спокойствие',desc:'Удлинённая задержка и выдох',pattern:'5 – 9 – 10',badge:'Уровень 3',badgeColor:'var(--rosed)'},
+{name:'Продвинутый сброс',desc:'Максимальный сброс нервной системы',pattern:'6 – 10 – 12',badge:'Продвинутый',badgeColor:'var(--rosed)'},
+],
+}};
+
+const techniques=[
+{inhale:4,hold:0,exhale:4,cycles:6},
+{inhale:4,hold:4,exhale:4,holdAfter:4,cycles:4},
+{inhale:4,hold:7,exhale:8,cycles:4},
+{inhale:5,hold:9,exhale:10,cycles:3},
+{inhale:6,hold:10,exhale:12,cycles:3},
+];
+
+let lang='en',ti=0,run=false,tmr=null,cyN=0,cd=0;
+function d(){return T[lang]}
+
+function setL(l){lang=l;document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('ac',b.textContent===l.toUpperCase()));stopB();renderUI()}
+
+function renderUI(){
+const $=d();
+document.getElementById('ttl').textContent=$.ttl;
+document.getElementById('sub').textContent=$.sub;
+document.getElementById('tip').textContent=$.tip;
+document.getElementById('btx').textContent=$.ready;
+document.getElementById('bcn').textContent='';
+document.getElementById('tmr').textContent='';
+document.getElementById('cyc').textContent='';
+document.getElementById('btns').innerHTML=`<button class="btn btn-p" onclick="startB()">${$.start}</button>`;
+
+document.getElementById('techList').innerHTML=`<div class="techs">${$.techs.map((t,i)=>`
+<div class="tech${i===ti?' ac':''}" onclick="pickT(${i})">
+  <span class="tech-badge" style="color:${t.badgeColor};background:${t.badgeColor}18">${t.badge}</span>
+  <div class="tech-info"><div class="tech-name">${t.name}</div><div class="tech-desc">${t.desc}</div></div>
+  <div class="tech-pattern">${t.pattern}</div>
+</div>`).join('')}</div>`;
+}
+
+function pickT(i){ti=i;stopB();renderUI()}
+
+function startB(){
+if(run)return;run=true;cyN=0;
+const $=d();
+document.getElementById('btns').innerHTML=`<button class="btn btn-s" onclick="stopB()">${$.stop}</button>`;
+['p1','p2','p3'].forEach(id=>document.getElementById(id).classList.add('on'));
+document.getElementById('ring').classList.add('on');
+runCyc();
+}
+
+function stopB(){
+run=false;clearTimeout(tmr);
+const c=document.getElementById('circ');c.className='bc idle';c.style.transition='transform 1s,background 1s';
+const $=d();
+document.getElementById('btx').textContent=$.ready;
+document.getElementById('bcn').textContent='';
+document.getElementById('tmr').textContent='';
+document.getElementById('cyc').textContent='';
+['p1','p2','p3'].forEach(id=>document.getElementById(id).classList.remove('on'));
+document.getElementById('ring').classList.remove('on');
+document.getElementById('tip').textContent=$.tip;
+document.getElementById('btns').innerHTML=`<button class="btn btn-p" onclick="startB()">${$.start}</button>`;
+}
+
+function runCyc(){
+if(!run)return;
+const t=techniques[ti],$=d();
+if(cyN>=t.cycles){finish();return}
+cyN++;
+document.getElementById('cyc').textContent=`${$.cycle} ${cyN} ${$.of} ${t.cycles}`;
+doPhase('inhale',t.inhale,()=>{
+  if(t.hold>0)doPhase('hold',t.hold,()=>{doPhase('exhale',t.exhale,()=>{
+    if(t.holdAfter)doPhase('hold',t.holdAfter,()=>runCyc());
+    else runCyc()})});
+  else doPhase('exhale',t.exhale,()=>runCyc())
+});
+}
+
+function doPhase(p,secs,cb){
+if(!run)return;
+const c=document.getElementById('circ'),$=d();
+if(p==='inhale')c.style.transition=`transform ${secs}s cubic-bezier(.4,0,.2,1), background ${secs}s`;
+else if(p==='exhale')c.style.transition=`transform ${secs}s cubic-bezier(.4,0,.6,1), background ${secs}s`;
+else c.style.transition='background .5s';
+c.className='bc '+p;
+document.getElementById('btx').textContent=$[p];
+cd=secs;document.getElementById('bcn').textContent=cd;
+const tick=()=>{if(!run)return;cd--;if(cd>0){document.getElementById('bcn').textContent=cd;tmr=setTimeout(tick,1000)}else{document.getElementById('bcn').textContent='';cb()}};
+tmr=setTimeout(tick,1000);
+}
+
+function finish(){
+run=false;const $=d(),c=document.getElementById('circ');
+c.className='bc idle';c.style.transition='transform 2s,background 2s';
+document.getElementById('btx').textContent=$.done;
+document.getElementById('bcn').textContent='✓';
+document.getElementById('tmr').textContent='';
+document.getElementById('cyc').textContent='';
+document.getElementById('tip').textContent=$.tipDone;
+['p1','p2','p3'].forEach(id=>document.getElementById(id).classList.remove('on'));
+document.getElementById('ring').classList.remove('on');
+document.getElementById('btns').innerHTML=`<button class="btn btn-p" onclick="startB()">${$.again}</button><button class="btn btn-s" style="margin-top:10px;background:#25D366;color:#fff;border-color:#25D366" onclick="window.open('https://wa.me/971551234567','_blank')">${lang==='en'?'Talk to a therapist':'Написать терапевту'}</button>`;
+}
+
+renderUI();
+</script>
+</body>
+</html>

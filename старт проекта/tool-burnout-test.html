@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burnout Check — Anna Barkley</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F5F2;--sage:#7C9A7C;--saged:#5B7A5B;--sagep:#E8EFE8;--rose:#EAC7C7;--rosed:#D4A9A9;--rosep:#F5E6E6;--gold:#C4A265;--ch:#1A1A1A;--tx:#3B3B3B;--txm:#8A8A80;--wh:#FFFFFF;--brd:#E8E4DC;--fh:'Sora',system-ui,sans-serif;--fb:'Plus Jakarta Sans',system-ui,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);font-family:var(--fb);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased}
+.wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;min-height:100vh;display:flex;flex-direction:column}
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:48px}
+.logo-ic{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--sage),var(--rosed));display:flex;align-items:center;justify-content:center}
+.logo-ic svg{width:18px;height:18px;color:#fff}
+.logo span{font-family:var(--fh);font-size:16px;color:var(--ch)}
+.lang{display:flex;gap:2px;background:rgba(0,0,0,.04);border-radius:20px;padding:2px;margin-left:auto}
+.lang button{font-family:var(--fb);font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;border:none;cursor:pointer;transition:all .3s;color:var(--txm);background:transparent}
+.lang button.ac{color:var(--wh);background:var(--sage)}
+h1{font-family:var(--fh);font-size:clamp(1.8rem,4vw,2.4rem);font-weight:300;color:var(--ch);letter-spacing:-.02em;line-height:1.15;margin-bottom:12px}
+.sub{font-size:16px;color:var(--txm);line-height:1.8;font-weight:300;margin-bottom:40px}
+.gl{width:60px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--sage),var(--rose));margin-bottom:24px}
+.prog{display:flex;gap:4px;margin-bottom:36px}.prog-dot{height:5px;flex:1;border-radius:5px;background:var(--brd);transition:all .5s}.prog-dot.done{background:var(--sage)}.prog-dot.cur{background:linear-gradient(90deg,var(--sage),var(--rose))}
+.q-num{font-family:var(--fh);font-size:13px;font-weight:600;color:var(--sage);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.q-text{font-family:var(--fh);font-size:clamp(1.1rem,2.5vw,1.4rem);font-weight:400;color:var(--ch);line-height:1.4;margin-bottom:28px}
+.q-scale{font-size:11px;color:var(--txm);margin-bottom:8px;font-weight:300}
+.opts{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.opt{display:flex;align-items:center;gap:16px;padding:16px 20px;border:1.5px solid var(--brd);border-radius:14px;background:var(--wh);cursor:pointer;transition:all .4s}
+.opt:hover{border-color:var(--sagem);transform:translateX(4px)}
+.opt.sel{border-color:var(--sage);background:var(--sagep)}
+.opt-c{width:20px;height:20px;border-radius:50%;border:2px solid var(--brd);display:flex;align-items:center;justify-content:center;transition:all .3s;flex-shrink:0}
+.opt.sel .opt-c{border-color:var(--sage);background:var(--sage)}
+.opt-ck{width:8px;height:8px;border-radius:50%;background:var(--wh);transform:scale(0);transition:transform .3s}.opt.sel .opt-ck{transform:scale(1)}
+.opt span{font-size:14px;color:var(--tx)}.opt.sel span{font-weight:500;color:var(--ch)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--fb);font-size:15px;font-weight:600;padding:16px 36px;border-radius:60px;border:none;cursor:pointer;transition:all .4s;width:100%}
+.btn-p{background:linear-gradient(135deg,var(--sage),var(--saged));color:var(--wh);box-shadow:0 4px 20px rgba(124,154,124,.3)}
+.btn-p:hover{box-shadow:0 12px 40px rgba(124,154,124,.4);transform:translateY(-2px)}
+.btn-o{background:transparent;color:var(--sage);border:1.5px solid var(--sagem)}
+.btn-wa{background:#25D366;color:#fff;box-shadow:0 4px 20px rgba(37,211,102,.25);width:100%}
+
+/* Result */
+.result{animation:fadeUp .8s cubic-bezier(.16,1,.3,1)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.bars{display:flex;flex-direction:column;gap:16px;margin-bottom:32px}
+.bar-row{display:flex;flex-direction:column;gap:6px}
+.bar-label{display:flex;justify-content:space-between;font-size:13px}
+.bar-name{font-family:var(--fh);font-weight:500;color:var(--ch)}
+.bar-val{font-weight:600}
+.bar-track{height:8px;background:var(--brd);border-radius:8px;overflow:hidden}
+.bar-fill{height:100%;border-radius:8px;transition:width 1.5s cubic-bezier(.16,1,.3,1)}
+.level{display:inline-block;font-family:var(--fb);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:8px 20px;border-radius:30px;margin-bottom:20px}
+.level-low{color:var(--sage);background:var(--sagep)}
+.level-mid{color:var(--gold);background:rgba(196,162,101,.12)}
+.level-high{color:var(--rosed);background:var(--rosep)}
+.r-text{font-size:15px;color:var(--txm);line-height:1.85;font-weight:300;margin-bottom:32px}
+.tip{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--brd)}
+.tip svg{flex-shrink:0;margin-top:2px}
+.tip span{font-size:14px;color:var(--tx);line-height:1.6;font-weight:300}
+.disc{font-size:12px;color:var(--txm);line-height:1.7;font-weight:300;margin-top:32px;padding:20px;border-radius:16px;background:rgba(0,0,0,.02);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="logo">
+  <div class="logo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 1 8-1.5 5-5.7 8.5-9 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div>
+  <span>Anna Barkley</span>
+  <div class="lang"><button class="ac" onclick="setL('en')">EN</button><button onclick="setL('ru')">RU</button></div>
+</div>
+<div id="app"></div>
+</div>
+<script>
+const WA='https://wa.me/971551234567';
+const chk='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>';
+
+const D={en:{
+title:'Burnout Self-Check',sub:'12 questions about your energy, motivation, and emotional state at work. Takes about 3 minutes.',
+start:'Start the Check',qn:'Question',of:'of',
+// 4 questions per subscale: Exhaustion (0-3), Depersonalization (4-7), Accomplishment (8-11)
+qs:[
+// Exhaustion
+{q:'How often do you feel emotionally drained by your work?',cat:'E'},
+{q:'Do you feel used up at the end of a workday?',cat:'E'},
+{q:'Do you feel fatigued when you get up and face another day?',cat:'E'},
+{q:'How often does working all day feel like a real strain?',cat:'E'},
+// Depersonalization
+{q:'Do you feel you treat some people as impersonal objects?',cat:'D'},
+{q:'Have you become more callous toward people since starting this job?',cat:'D'},
+{q:'Do you worry this job is making you emotionally harder?',cat:'D'},
+{q:'Do you feel indifferent about what happens to certain people you work with?',cat:'D'},
+// Accomplishment (reverse scored)
+{q:'Do you feel you are positively influencing people through your work?',cat:'A'},
+{q:'Do you feel energetic and effective at work?',cat:'A'},
+{q:'Can you easily create a relaxed atmosphere in your work?',cat:'A'},
+{q:'Do you feel exhilarated after working closely with people?',cat:'A'},
+],
+os:['Never','Rarely','Sometimes','Often'],
+cats:{E:'Emotional Exhaustion',D:'Depersonalization',A:'Personal Accomplishment'},
+levels:[
+{max:14,key:'low',label:'Low Burnout Risk',desc:'Your overall burnout indicators are within a healthy range. You appear to have good coping strategies and a sustainable relationship with your work.',tips:['Continue maintaining work-life boundaries','Regular exercise and sleep habits protect you','Stay connected with colleagues and friends','Notice early warning signs if things change']},
+{max:26,key:'mid',label:'Moderate Burnout Risk',desc:'You show signs of burnout developing. This is the most important stage to intervene — before it becomes severe.',tips:['Set firm boundaries around work hours this week','Identify your top 3 energy drains and address one','Talk to someone you trust about how you feel','A structured approach (therapy + lifestyle) works best at this level']},
+{max:36,key:'high',label:'High Burnout Risk',desc:'Your responses indicate significant burnout across multiple dimensions. This level of exhaustion affects your health, relationships, and work quality.',tips:['Professional support is strongly recommended now','Consider speaking with your manager about workload','Your body and mind are sending a clear signal — listen','Recovery is possible, but it requires active changes, not just rest']}
+],
+result:'Your Burnout Profile',retake:'Take Again',wa:'Chat on WhatsApp',book:'Book a Consultation',
+disc:'This screening is based on validated burnout assessment principles (MBI adapted). It is not a clinical diagnosis. If you are experiencing severe symptoms, please seek professional support.',
+},ru:{
+title:'Проверка на выгорание',sub:'12 вопросов об энергии, мотивации и эмоциональном состоянии. Занимает 3 минуты.',
+start:'Начать проверку',qn:'Вопрос',of:'из',
+qs:[
+{q:'Как часто вы чувствуете эмоциональное истощение от работы?',cat:'E'},
+{q:'Чувствуете ли вы себя опустошённым в конце рабочего дня?',cat:'E'},
+{q:'Чувствуете ли вы усталость, когда просыпаетесь и думаете о новом рабочем дне?',cat:'E'},
+{q:'Ощущается ли работа целый день как настоящее напряжение?',cat:'E'},
+{q:'Вы стали относиться к некоторым людям как к безличным объектам?',cat:'D'},
+{q:'Стали ли вы более чёрствым к людям с начала этой работы?',cat:'D'},
+{q:'Вас беспокоит, что работа делает вас эмоционально жёстче?',cat:'D'},
+{q:'Вам безразлично, что происходит с некоторыми коллегами/клиентами?',cat:'D'},
+{q:'Чувствуете ли вы, что положительно влияете на людей через работу?',cat:'A'},
+{q:'Чувствуете ли вы себя энергичным и эффективным на работе?',cat:'A'},
+{q:'Можете ли вы легко создать спокойную атмосферу в работе?',cat:'A'},
+{q:'Чувствуете ли вы подъём после плотной работы с людьми?',cat:'A'},
+],
+os:['Никогда','Редко','Иногда','Часто'],
+cats:{E:'Эмоциональное истощение',D:'Деперсонализация',A:'Личные достижения'},
+levels:[
+{max:14,key:'low',label:'Низкий риск выгорания',desc:'Ваши показатели в здоровом диапазоне. У вас хорошие стратегии совладания.',tips:['Продолжайте поддерживать баланс работа-жизнь','Физическая активность и сон — ваша защита','Поддерживайте связь с коллегами и близкими','Замечайте ранние сигналы, если что-то изменится']},
+{max:26,key:'mid',label:'Умеренный риск выгорания',desc:'Есть признаки развивающегося выгорания. Это важный момент для вмешательства — до того, как станет тяжелее.',tips:['Установите чёткие границы рабочего времени','Определите 3 главных источника утечки энергии','Поговорите с кем-то, кому доверяете','Структурированный подход (терапия + образ жизни) наиболее эффективен']},
+{max:36,key:'high',label:'Высокий риск выгорания',desc:'Ваши ответы указывают на значительное выгорание. Этот уровень истощения влияет на здоровье, отношения и качество работы.',tips:['Профессиональная поддержка настоятельно рекомендуется','Обсудите нагрузку с руководителем','Тело и ум посылают ясный сигнал — прислушайтесь','Восстановление возможно, но требует активных изменений, а не только отдыха']}
+],
+result:'Ваш профиль выгорания',retake:'Пройти заново',wa:'Написать в WhatsApp',book:'Записаться на консультацию',
+disc:'Скрининг основан на валидированных принципах оценки выгорания (адаптация MBI). Это не клинический диагноз.',
+}};
+
+let lang='en',step=-1,answers=[],sel=-1;
+const d=()=>D[lang];
+
+function setL(l){lang=l;document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('ac',b.textContent===l.toUpperCase()));step=-1;answers=[];sel=-1;render()}
+
+function render(){
+const $=d(),app=document.getElementById('app');
+if(step===-1){
+  app.innerHTML=`<h1>${$.title}</h1><div class="gl"></div><p class="sub">${$.sub}</p><button class="btn btn-p" onclick="next()">${$.start} →</button>`;return}
+if(step>=$.qs.length){showResult();return}
+const q=$.qs[step];
+app.innerHTML=`<div class="prog">${$.qs.map((_,i)=>`<div class="prog-dot${i<step?' done':''}${i===step?' cur':''}"></div>`).join('')}</div>
+<div class="q-num">${$.qn} ${step+1} ${$.of} ${$.qs.length}</div>
+<div class="q-text">${q.q}</div>
+<div class="opts">${$.os.map((o,i)=>`<div class="opt${sel===i?' sel':''}" onclick="pick(${i})"><div class="opt-c"><div class="opt-ck"></div></div><span>${o}</span></div>`).join('')}</div>
+${sel>=0?`<button class="btn btn-p" onclick="next()">${step<$.qs.length-1?(lang==='en'?'Next':'Далее'):(lang==='en'?'See Results':'Результат')} →</button>`:''}`}
+
+function pick(i){sel=i;render()}
+function next(){if(step>=0&&sel>=0)answers.push(sel);sel=-1;step++;render()}
+
+function showResult(){
+const $=d();
+// Calculate subscale scores
+let E=0,Ds=0,A=0;
+answers.forEach((v,i)=>{
+  if(i<4)E+=v; // Exhaustion: higher = worse
+  else if(i<8)Ds+=v; // Depersonalization: higher = worse
+  else A+=(3-v); // Accomplishment: reverse scored (lower feeling = worse)
+});
+const total=E+Ds+A;
+const maxE=12,maxD=12,maxA=12;
+const level=$.levels.find(l=>total<=l.max)||$.levels[2];
+const colors={low:'var(--sage)',mid:'var(--gold)',high:'var(--rosed)'};
+
+const barData=[
+  {name:$.cats.E,val:E,max:maxE,color:'#D49A9A'},
+  {name:$.cats.D,val:Ds,max:maxD,color:'#C4B08B'},
+  {name:$.cats.A,val:A,max:maxA,color:'#89A4C7'},
+];
+
+document.getElementById('app').innerHTML=`<div class="result" style="text-align:center">
+<h2 style="font-family:var(--fh);font-size:clamp(1.4rem,3vw,1.8rem);font-weight:300;color:var(--ch);margin-bottom:24px">${$.result}</h2>
+<div class="level level-${level.key}">${level.label}</div>
+<div class="bars" style="text-align:left">${barData.map(b=>`<div class="bar-row"><div class="bar-label"><span class="bar-name">${b.name}</span><span class="bar-val" style="color:${b.color}">${b.val}/${b.max}</span></div><div class="bar-track"><div class="bar-fill" style="width:${(b.val/b.max)*100}%;background:${b.color}"></div></div></div>`).join('')}</div>
+<p class="r-text">${level.desc}</p>
+<div style="text-align:left;margin-bottom:32px">${level.tips.map(t=>`<div class="tip">${chk}<span>${t}</span></div>`).join('')}</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<button class="btn btn-wa" onclick="window.open('${WA}?text=${encodeURIComponent(lang==='en'?'Hi Anna, I took the burnout check and scored '+total+'/36. Exhaustion: '+E+', Depersonalization: '+Ds+', Accomplishment: '+A+'. I\'d like to discuss.':'Здравствуйте! Прошла тест выгорания: '+total+'/36. Истощение: '+E+', Деперсонализация: '+Ds+', Достижения: '+A+'.')}','_blank')">${$.wa}</button>
+<button class="btn btn-o" onclick="step=-1;answers=[];sel=-1;render()">${$.retake}</button>
+</div>
+<div class="disc">${$.disc}</div>
+</div>`;
+// Animate bars
+setTimeout(()=>{document.querySelectorAll('.bar-fill').forEach(b=>{b.style.width=b.style.width})},50)}
+
+render();
+</script>
+</body>
+</html>

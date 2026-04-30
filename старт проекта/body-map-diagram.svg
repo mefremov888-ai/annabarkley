@@ -1,0 +1,190 @@
+<svg viewBox="0 0 600 900" xmlns="http://www.w3.org/2000/svg" style="background:#F7F5F2">
+<defs>
+  <style>
+    .body-outline { fill: none; stroke: #3B3B3B; stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+    .body-detail { fill: none; stroke: #3B3B3B; stroke-width: 0.8; opacity: 0.4; }
+    .label-text { font-family: 'Sora', 'Segoe UI', system-ui, sans-serif; font-size: 13px; font-weight: 500; fill: #1A1A1A; }
+    .label-sub { font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif; font-size: 10px; font-weight: 300; fill: #8A8A80; }
+    .connector { fill: none; stroke: #C4BEB4; stroke-width: 0.8; }
+    .dot { fill: none; stroke-width: 1.5; }
+    .dot-fill { opacity: 0.15; }
+  </style>
+</defs>
+
+<!-- ═══ HUMAN BODY OUTLINE ═══ -->
+<g transform="translate(200, 30)">
+  <!-- Head -->
+  <path class="body-outline" d="
+    M100 10
+    C78 10 66 28 66 48
+    C66 68 78 82 90 84
+    L90 94
+    C86 96 84 100 84 106
+  "/>
+  <path class="body-outline" d="
+    M100 10
+    C122 10 134 28 134 48
+    C134 68 122 82 110 84
+    L110 94
+    C114 96 116 100 116 106
+  "/>
+
+  <!-- Neck + Shoulders + Arms (left) -->
+  <path class="body-outline" d="
+    M84 106
+    C70 108 56 116 46 130
+    C34 148 26 172 22 200
+    C18 228 16 254 18 272
+    C18 284 22 294 28 302
+    L30 310
+    C26 328 22 350 18 370
+    C16 384 18 392 24 394
+    C28 394 32 390 36 380
+    C40 364 44 348 48 332
+    C52 314 54 302 54 288
+    C56 268 60 246 66 222
+    C70 202 78 186 86 170
+    C90 160 94 150 96 140
+    L96 260
+    C96 310 96 340 98 368
+    C100 390 102 404 104 414
+    C98 424 90 444 82 472
+    C74 504 70 534 70 558
+    C70 580 72 598 76 612
+    C78 620 82 628 88 628
+    L108 628
+    C112 626 112 622 110 616
+    C106 608 104 600 104 590
+    C104 574 106 554 110 528
+    C114 502 120 482 124 464
+  "/>
+
+  <!-- Right side (mirrored) -->
+  <path class="body-outline" d="
+    M116 106
+    C130 108 144 116 154 130
+    C166 148 174 172 178 200
+    C182 228 184 254 182 272
+    C182 284 178 294 172 302
+    L170 310
+    C174 328 178 350 182 370
+    C184 384 182 392 176 394
+    C172 394 168 390 164 380
+    C160 364 156 348 152 332
+    C148 314 146 302 146 288
+    C144 268 140 246 134 222
+    C130 202 122 186 114 170
+    C110 160 106 150 104 140
+    L104 260
+    C104 310 104 340 102 368
+    C100 390 98 404 96 414
+    C102 424 110 444 118 472
+    C126 504 130 534 130 558
+    C130 580 128 598 124 612
+    C122 620 118 628 112 628
+    L92 628
+    C88 626 88 622 90 616
+    C94 608 96 600 96 590
+    C96 574 94 554 90 528
+    C86 502 80 482 76 464
+  "/>
+
+  <!-- Inner legs -->
+  <path class="body-detail" d="M104 414 C102 430 100 438 96 446"/>
+  <path class="body-detail" d="M96 414 C98 430 100 438 104 446"/>
+
+  <!-- Anatomical details -->
+  <path class="body-detail" d="M90 108 Q78 112 68 120"/>
+  <path class="body-detail" d="M110 108 Q122 112 132 120"/>
+  <path class="body-detail" d="M92 160 Q100 172 108 160"/>
+  <ellipse class="body-detail" cx="100" cy="280" rx="5" ry="6"/>
+  <path class="body-detail" d="M94 382 Q100 390 106 382"/>
+</g>
+
+<!-- ═══ ZONE DOTS + LABELS ═══ -->
+
+<!-- 1. HEAD — right side -->
+<circle class="dot" cx="300" cy="68" r="14" stroke="#C9B5D4"/>
+<circle class="dot-fill" cx="300" cy="68" r="14" fill="#C9B5D4"/>
+<line class="connector" x1="314" y1="68" x2="440" y2="68"/>
+<circle cx="440" cy="68" r="3" fill="#C9B5D4"/>
+<text class="label-text" x="452" y="64">Head</text>
+<text class="label-sub" x="452" y="78">Overthinking · Perfectionism · Control</text>
+
+<!-- 2. JAW — left side -->
+<circle class="dot" cx="300" cy="112" r="10" stroke="#D49A9A"/>
+<circle class="dot-fill" cx="300" cy="112" r="10" fill="#D49A9A"/>
+<line class="connector" x1="290" y1="112" x2="160" y2="112"/>
+<circle cx="160" cy="112" r="3" fill="#D49A9A"/>
+<text class="label-text" x="24" y="108" text-anchor="start">Jaw</text>
+<text class="label-sub" x="24" y="122" text-anchor="start">Suppressed anger · Clenching · Bruxism</text>
+
+<!-- 3. THROAT — right side -->
+<circle class="dot" cx="300" cy="142" r="9" stroke="#89A4C7"/>
+<circle class="dot-fill" cx="300" cy="142" r="9" fill="#89A4C7"/>
+<line class="connector" x1="309" y1="142" x2="440" y2="142"/>
+<circle cx="440" cy="142" r="3" fill="#89A4C7"/>
+<text class="label-text" x="452" y="138">Throat</text>
+<text class="label-sub" x="452" y="152">Unsaid words · Fear of expression</text>
+
+<!-- 4. SHOULDERS — left side -->
+<circle class="dot" cx="300" cy="172" r="12" stroke="#9BB5A0"/>
+<circle class="dot-fill" cx="300" cy="172" r="12" fill="#9BB5A0"/>
+<line class="connector" x1="288" y1="172" x2="160" y2="172"/>
+<circle cx="160" cy="172" r="3" fill="#9BB5A0"/>
+<text class="label-text" x="24" y="168">Shoulders</text>
+<text class="label-sub" x="24" y="182">Responsibility · Burden · Guilt</text>
+
+<!-- 5. CHEST — right side -->
+<circle class="dot" cx="300" cy="240" r="16" stroke="#A8D5A2"/>
+<circle class="dot-fill" cx="300" cy="240" r="16" fill="#A8D5A2"/>
+<line class="connector" x1="316" y1="240" x2="440" y2="240"/>
+<circle cx="440" cy="240" r="3" fill="#A8D5A2"/>
+<text class="label-text" x="452" y="236">Chest & Heart</text>
+<text class="label-sub" x="452" y="250">Grief · Heartbreak · Vulnerability</text>
+
+<!-- 6. UPPER BACK — right side -->
+<circle class="dot" cx="336" cy="310" r="10" stroke="#C4B08B"/>
+<circle class="dot-fill" cx="336" cy="310" r="10" fill="#C4B08B"/>
+<line class="connector" x1="346" y1="310" x2="440" y2="310"/>
+<circle cx="440" cy="310" r="3" fill="#C4B08B"/>
+<text class="label-text" x="452" y="306">Upper Back</text>
+<text class="label-sub" x="452" y="320">No support · Loneliness · Self-reliance</text>
+
+<!-- 7. STOMACH — left side -->
+<circle class="dot" cx="300" cy="370" r="14" stroke="#D4C49A"/>
+<circle class="dot-fill" cx="300" cy="370" r="14" fill="#D4C49A"/>
+<line class="connector" x1="286" y1="370" x2="160" y2="370"/>
+<circle cx="160" cy="370" r="3" fill="#D4C49A"/>
+<text class="label-text" x="24" y="366">Stomach & Gut</text>
+<text class="label-sub" x="24" y="380">Anxiety · Fear · Gut-brain axis</text>
+
+<!-- 8. HANDS — left side -->
+<circle class="dot" cx="240" cy="430" r="10" stroke="#A8BFA8"/>
+<circle class="dot-fill" cx="240" cy="430" r="10" fill="#A8BFA8"/>
+<line class="connector" x1="230" y1="430" x2="160" y2="430"/>
+<circle cx="160" cy="430" r="3" fill="#A8BFA8"/>
+<text class="label-text" x="24" y="426">Hands & Arms</text>
+<text class="label-sub" x="24" y="440">Blocked action · Powerlessness</text>
+
+<!-- 9. LOWER ABDOMEN — right side -->
+<circle class="dot" cx="300" cy="450" r="12" stroke="#D49A9A"/>
+<circle class="dot-fill" cx="300" cy="450" r="12" fill="#D49A9A"/>
+<line class="connector" x1="312" y1="450" x2="440" y2="450"/>
+<circle cx="440" cy="450" r="3" fill="#D49A9A"/>
+<text class="label-text" x="452" y="446">Lower Abdomen</text>
+<text class="label-sub" x="452" y="460">Safety · Shame · Boundaries</text>
+
+<!-- 10. LEGS — left side -->
+<circle class="dot" cx="280" cy="650" r="10" stroke="#9BB5A0"/>
+<circle class="dot-fill" cx="280" cy="650" r="10" fill="#9BB5A0"/>
+<line class="connector" x1="270" y1="650" x2="160" y2="650"/>
+<circle cx="160" cy="650" r="3" fill="#9BB5A0"/>
+<text class="label-text" x="24" y="646">Legs & Knees</text>
+<text class="label-sub" x="24" y="660">Instability · Fear of the future</text>
+
+<!-- ═══ TITLE ═══ -->
+<text font-family="Sora, system-ui, sans-serif" font-size="22" font-weight="300" fill="#1A1A1A" x="300" y="850" text-anchor="middle" letter-spacing="-0.5">Body & Emotions Map</text>
+<text font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="11" font-weight="300" fill="#8A8A80" x="300" y="870" text-anchor="middle">Anna Barkley · Psychologist · Dubai</text>
+
+</svg>

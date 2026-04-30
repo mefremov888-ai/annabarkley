@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anxiety Self-Check — Anna Barkley</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F5F2;--sage:#7C9A7C;--saged:#5B7A5B;--sagem:#A8BFA8;--sagep:#E8EFE8;--rose:#EAC7C7;--rosed:#D4A9A9;--rosep:#F5E6E6;--gold:#C4A265;--ch:#1A1A1A;--tx:#3B3B3B;--txm:#8A8A80;--wh:#FFFFFF;--brd:#E8E4DC;--fh:'Sora',system-ui,sans-serif;--fb:'Plus Jakarta Sans',system-ui,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);font-family:var(--fb);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased}
+::selection{background:var(--sagep);color:var(--ch)}
+body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.022;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;min-height:100vh;display:flex;flex-direction:column}
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:48px}
+.logo-ic{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--sage),var(--rosed));display:flex;align-items:center;justify-content:center}
+.logo-ic svg{width:18px;height:18px;color:#fff}
+.logo span{font-family:var(--fh);font-size:16px;font-weight:400;color:var(--ch)}
+.lang{display:flex;gap:2px;background:rgba(0,0,0,.04);border-radius:20px;padding:2px;margin-left:auto}
+.lang button{font-family:var(--fb);font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;border:none;cursor:pointer;transition:all .3s;color:var(--txm);background:transparent}
+.lang button.ac{color:var(--wh);background:var(--sage)}
+
+h1{font-family:var(--fh);font-size:clamp(1.8rem,4vw,2.4rem);font-weight:300;color:var(--ch);letter-spacing:-.02em;line-height:1.15;margin-bottom:12px}
+h2{font-family:var(--fh);font-size:clamp(1.4rem,3vw,1.8rem);font-weight:300;color:var(--ch);letter-spacing:-.02em;margin-bottom:16px}
+.sub{font-size:16px;color:var(--txm);line-height:1.8;font-weight:300;margin-bottom:40px}
+.gl{width:60px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--sage),var(--rose),var(--sage));background-size:200% 100%;animation:gs 4s ease infinite;margin-bottom:24px}
+@keyframes gs{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+/* Progress */
+.prog{display:flex;gap:4px;margin-bottom:36px}
+.prog-dot{height:5px;flex:1;border-radius:5px;background:var(--brd);transition:all .5s cubic-bezier(.16,1,.3,1)}
+.prog-dot.done{background:var(--sage)}
+.prog-dot.cur{background:linear-gradient(90deg,var(--sage),var(--rose));box-shadow:0 0 8px rgba(124,154,124,.3)}
+
+/* Question */
+.q-num{font-family:var(--fh);font-size:13px;font-weight:600;color:var(--sage);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.q-text{font-family:var(--fh);font-size:clamp(1.1rem,2.5vw,1.4rem);font-weight:400;color:var(--ch);line-height:1.4;margin-bottom:28px;letter-spacing:-.01em}
+
+/* Options */
+.opts{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.opt{display:flex;align-items:center;gap:16px;padding:18px 24px;border:1.5px solid var(--brd);border-radius:16px;background:var(--wh);cursor:pointer;transition:all .4s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.opt:hover{border-color:var(--sagem);transform:translateX(4px);background:rgba(232,239,232,.3)}
+.opt.sel{border-color:var(--sage);background:var(--sagep)}
+.opt-circle{width:22px;height:22px;border-radius:50%;border:2px solid var(--brd);display:flex;align-items:center;justify-content:center;transition:all .3s;flex-shrink:0}
+.opt.sel .opt-circle{border-color:var(--sage);background:var(--sage)}
+.opt-check{width:10px;height:10px;border-radius:50%;background:var(--wh);transform:scale(0);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.opt.sel .opt-check{transform:scale(1)}
+.opt-label{font-size:15px;font-weight:400;color:var(--tx);transition:color .3s}
+.opt.sel .opt-label{font-weight:500;color:var(--ch)}
+.opt-score{font-size:12px;color:var(--txm);margin-left:auto;opacity:.5}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--fb);font-size:15px;font-weight:600;padding:16px 36px;border-radius:60px;border:none;cursor:pointer;transition:all .4s cubic-bezier(.16,1,.3,1)}
+.btn-p{background:linear-gradient(135deg,var(--sage),var(--saged));color:var(--wh);box-shadow:0 4px 20px rgba(124,154,124,.3);width:100%}
+.btn-p:hover{box-shadow:0 12px 40px rgba(124,154,124,.4);transform:translateY(-2px)}
+.btn-o{background:transparent;color:var(--sage);border:1.5px solid var(--sagem)}
+.btn-o:hover{background:var(--sagep)}
+.btn-wa{background:#25D366;color:#fff;box-shadow:0 4px 20px rgba(37,211,102,.25);width:100%}
+.btn-wa:hover{box-shadow:0 12px 40px rgba(37,211,102,.35);transform:translateY(-2px)}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* Result */
+.result{text-align:center;animation:fadeUp .8s cubic-bezier(.16,1,.3,1)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.score-circle{width:160px;height:160px;border-radius:50%;margin:0 auto 32px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.score-circle::before{content:'';position:absolute;inset:0;border-radius:50%;border:3px solid var(--brd)}
+.score-circle svg{position:absolute;inset:-2px;transform:rotate(-90deg)}
+.score-num{font-family:var(--fh);font-size:48px;font-weight:300;color:var(--ch);letter-spacing:-.03em;line-height:1}
+.score-max{font-size:14px;color:var(--txm);font-weight:300}
+.level{display:inline-block;font-family:var(--fb);font-size:13px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:8px 20px;border-radius:30px;margin-bottom:20px}
+.level-low{color:var(--sage);background:var(--sagep)}
+.level-mid{color:var(--gold);background:rgba(196,162,101,.12)}
+.level-high{color:var(--rosed);background:var(--rosep)}
+.result-text{font-size:16px;color:var(--txm);line-height:1.85;font-weight:300;margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto}
+.result-tips{text-align:left;margin-bottom:40px}
+.tip{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--brd)}
+.tip svg{flex-shrink:0;margin-top:2px}
+.tip span{font-size:14px;color:var(--tx);line-height:1.6;font-weight:300}
+.disclaimer{font-size:12px;color:var(--txm);line-height:1.7;font-weight:300;margin-top:32px;padding:20px;border-radius:16px;background:rgba(0,0,0,.02);text-align:center}
+
+/* Transitions */
+.q-container{transition:opacity .4s,transform .4s cubic-bezier(.16,1,.3,1)}
+.q-container.exit{opacity:0;transform:translateX(-30px)}
+.q-container.enter{opacity:0;transform:translateX(30px)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="logo">
+  <div class="logo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 1 8-1.5 5-5.7 8.5-9 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div>
+  <span>Anna Barkley</span>
+  <div class="lang"><button class="ac" onclick="setL('en')">EN</button><button onclick="setL('ru')">RU</button></div>
+</div>
+<div id="app"></div>
+</div>
+
+<script>
+const WA='https://wa.me/971551234567';
+const chk='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>';
+
+const D={en:{
+title:'Anxiety Self-Check',sub:'Answer 10 questions honestly. This is not a diagnosis — it\'s a starting point for understanding how anxiety may be affecting your daily life.',
+qn:'Question',of:'of',
+qs:[
+{q:'How often do you feel nervous, anxious, or on edge?',os:['Not at all','Several days','More than half the days','Nearly every day']},
+{q:'How often are you unable to stop or control worrying?',os:['Not at all','Several days','More than half the days','Nearly every day']},
+{q:'How often do you have trouble relaxing?',os:['Not at all','Several days','More than half the days','Nearly every day']},
+{q:'How often do you feel restless, so that it\'s hard to sit still?',os:['Not at all','Several days','More than half the days','Nearly every day']},
+{q:'How often do you become easily annoyed or irritable?',os:['Not at all','Several days','More than half the days','Nearly every day']},
+{q:'How often do you feel afraid, as if something terrible might happen?',os:['Not at all','Several days','More than half the days','Nearly every day']},
+{q:'How often do you have difficulty concentrating on things?',os:['Not at all','Several days','More than half the days','Nearly every day']},
+{q:'How often do you have trouble falling asleep or staying asleep?',os:['Not at all','Several days','More than half the days','Nearly every day']},
+{q:'How often do you experience physical symptoms (racing heart, sweating, tension)?',os:['Not at all','Several days','More than half the days','Nearly every day']},
+{q:'How much does anxiety interfere with your work, social life, or relationships?',os:['Not at all','A little','Moderately','Severely']},
+],
+levels:[
+{min:0,max:7,key:'low',label:'Low Anxiety',color:'sage',desc:'Your anxiety levels appear to be within a normal range. Everyone experiences some worry — and yours seems manageable right now.',tips:['Continue maintaining healthy routines and sleep habits','Practice mindfulness or deep breathing when stress builds','Stay connected with people who support you','Consider a check-in session if anything changes']},
+{min:8,max:17,key:'mid',label:'Moderate Anxiety',color:'gold',desc:'Your responses suggest moderate anxiety that may be affecting your daily functioning. This is very common — and very treatable.',tips:['Structured therapy (CBT) is highly effective at this level','Regular exercise and sleep hygiene can make a real difference','Journaling or tracking your worry patterns helps build awareness','A professional assessment can clarify what would help most']},
+{min:18,max:30,key:'high',label:'Elevated Anxiety',color:'rose',desc:'Your responses indicate significant anxiety that is likely affecting multiple areas of your life. This level of distress is not something you need to manage alone.',tips:['Professional support is strongly recommended at this level','CBT and exposure therapy have strong evidence for reducing anxiety','A thorough assessment will help create a targeted plan','You\'ve already taken an important step by recognizing this']}
+],
+result:'Your Result',book:'Book a Free Consultation',wa:'Chat on WhatsApp',retake:'Take Again',
+disc:'This self-check is for informational purposes only and is not a clinical diagnosis. It is based on validated screening tools (GAD-7 adapted) but does not replace professional assessment. If you are in crisis, please contact emergency services.',
+},ru:{
+title:'Самопроверка тревожности',sub:'Ответьте на 10 вопросов честно. Это не диагноз — это отправная точка для понимания того, как тревога может влиять на вашу жизнь.',
+qn:'Вопрос',of:'из',
+qs:[
+{q:'Как часто вы чувствуете нервозность, тревогу или напряжение?',os:['Совсем нет','Несколько дней','Больше половины дней','Почти каждый день']},
+{q:'Как часто вы не можете остановить или контролировать беспокойство?',os:['Совсем нет','Несколько дней','Больше половины дней','Почти каждый день']},
+{q:'Как часто вам трудно расслабиться?',os:['Совсем нет','Несколько дней','Больше половины дней','Почти каждый день']},
+{q:'Как часто вы чувствуете беспокойство, что трудно усидеть на месте?',os:['Совсем нет','Несколько дней','Больше половины дней','Почти каждый день']},
+{q:'Как часто вы легко раздражаетесь?',os:['Совсем нет','Несколько дней','Больше половины дней','Почти каждый день']},
+{q:'Как часто вы чувствуете страх, будто может случиться что-то ужасное?',os:['Совсем нет','Несколько дней','Больше половины дней','Почти каждый день']},
+{q:'Как часто вам трудно сосредоточиться?',os:['Совсем нет','Несколько дней','Больше половины дней','Почти каждый день']},
+{q:'Как часто вам трудно заснуть или не просыпаться ночью?',os:['Совсем нет','Несколько дней','Больше половины дней','Почти каждый день']},
+{q:'Как часто вы испытываете физические симптомы (сердцебиение, потливость, напряжение)?',os:['Совсем нет','Несколько дней','Больше половины дней','Почти каждый день']},
+{q:'Насколько тревога мешает вашей работе, социальной жизни или отношениям?',os:['Совсем не мешает','Немного','Умеренно','Сильно']},
+],
+levels:[
+{min:0,max:7,key:'low',label:'Низкая тревожность',color:'sage',desc:'Ваш уровень тревожности в пределах нормы. Все испытывают волнение — и ваше сейчас управляемо.',tips:['Продолжайте поддерживать здоровые привычки и режим сна','Практикуйте осознанность или дыхательные упражнения при стрессе','Поддерживайте связь с близкими людьми','Рассмотрите профилактическую консультацию']},
+{min:8,max:17,key:'mid',label:'Умеренная тревожность',color:'gold',desc:'Ваши ответы указывают на умеренную тревожность, которая может влиять на повседневную жизнь. Это очень распространено — и хорошо поддаётся терапии.',tips:['Структурированная терапия (КПТ) высокоэффективна на этом уровне','Регулярные упражнения и гигиена сна помогают','Ведение дневника тревоги повышает осознанность','Профессиональная оценка поможет определить лучший план']},
+{min:18,max:30,key:'high',label:'Повышенная тревожность',color:'rose',desc:'Ваши ответы указывают на значительную тревожность, которая, вероятно, влияет на несколько сфер жизни. С этим не нужно справляться в одиночку.',tips:['Профессиональная поддержка настоятельно рекомендуется','КПТ и экспозиционная терапия имеют сильную доказательную базу','Тщательная оценка поможет создать целевой план','Вы уже сделали важный шаг, признав это']}
+],
+result:'Ваш результат',book:'Записаться на консультацию',wa:'Написать в WhatsApp',retake:'Пройти заново',
+disc:'Этот тест носит информационный характер и не является клиническим диагнозом. Он основан на валидированных инструментах скрининга (адаптация GAD-7), но не заменяет профессиональную оценку.',
+}};
+
+let lang='en',step=-1,answers=[],sel=-1;
+const d=()=>D[lang];
+
+function setL(l){lang=l;document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('ac',b.textContent===l.toUpperCase()));step=-1;answers=[];sel=-1;render()}
+
+function render(){
+const $=d(),app=document.getElementById('app');
+if(step===-1){
+  app.innerHTML=`<div class="q-container"><h1>${$.title}</h1><div class="gl"></div><p class="sub">${$.sub}</p><button class="btn btn-p" onclick="next()">${lang==='en'?'Start the Test':'Начать тест'} →</button></div>`;return}
+if(step>=$.qs.length){showResult();return}
+const q=$.qs[step];
+app.innerHTML=`<div class="q-container"><div class="prog">${$.qs.map((_,i)=>`<div class="prog-dot${i<step?' done':''}${i===step?' cur':''}"></div>`).join('')}</div>
+<div class="q-num">${$.qn} ${step+1} ${$.of} ${$.qs.length}</div>
+<div class="q-text">${q.q}</div>
+<div class="opts">${q.os.map((o,i)=>`<div class="opt${sel===i?' sel':''}" onclick="pick(${i})"><div class="opt-circle"><div class="opt-check"></div></div><span class="opt-label">${o}</span></div>`).join('')}</div>
+${sel>=0?`<button class="btn btn-p" onclick="next()">${step<$.qs.length-1?(lang==='en'?'Next Question':'Следующий вопрос'):(lang==='en'?'See Results':'Посмотреть результат')} →</button>`:''}</div>`}
+
+function pick(i){sel=i;render()}
+function next(){if(step>=0&&sel>=0)answers.push(sel);sel=-1;step++;render()}
+
+function showResult(){
+const $=d(),total=answers.reduce((a,b)=>a+b,0),max=$.qs.length*3;
+const level=$.levels.find(l=>total>=l.min&&total<=l.max)||$.levels[2];
+const pct=total/max*100;
+const colors={sage:'var(--sage)',gold:'var(--gold)',rose:'var(--rosed)'};
+const c=colors[level.color];
+const circumference=2*Math.PI*72;
+const offset=circumference-(pct/100)*circumference;
+
+document.getElementById('app').innerHTML=`<div class="result">
+<h2>${$.result}</h2>
+<div class="score-circle">
+<svg width="164" height="164" viewBox="0 0 164 164"><circle cx="82" cy="82" r="72" fill="none" stroke="${c}" stroke-width="4" stroke-dasharray="${circumference}" stroke-dashoffset="${offset}" stroke-linecap="round" style="transition:stroke-dashoffset 1.5s cubic-bezier(.16,1,.3,1)"/></svg>
+<div class="score-num">${total}</div>
+<div class="score-max">/ ${max}</div>
+</div>
+<div class="level level-${level.key}">${level.label}</div>
+<p class="result-text">${level.desc}</p>
+<div class="result-tips">${level.tips.map(t=>`<div class="tip">${chk}<span>${t}</span></div>`).join('')}</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<button class="btn btn-p" onclick="window.open('${WA}?text=${encodeURIComponent(lang==='en'?'Hi Anna, I just took the anxiety self-check and scored '+total+'/'+max+'. I\'d like to discuss my results.':'Здравствуйте, Анна! Я прошла тест тревожности и набрала '+total+'/'+max+'. Хотела бы обсудить результаты.')}','_blank')">${$.wa}</button>
+<button class="btn btn-o" onclick="step=-1;answers=[];sel=-1;render()">${$.retake}</button>
+</div>
+<div class="disclaimer">${$.disc}</div>
+</div>`;
+// Animate circle
+setTimeout(()=>{const circle=document.querySelector('.score-circle svg circle');if(circle)circle.style.strokeDashoffset=offset},50)}
+
+render();
+</script>
+</body>
+</html>
