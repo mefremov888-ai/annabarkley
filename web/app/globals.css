@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #F7F5F2;
+  --bg-deep: #EFECE7;
+  --sage: #7C9A7C;
+  --sage-deep: #5B7A5B;
+  --sage-muted: #A8BFA8;
+  --sage-pale: #E8EFE8;
+  --rose: #EAC7C7;
+  --rose-deep: #D4A9A9;
+  --rose-pale: #F5E6E6;
+  --gold: #C4A265;
+  --gold-pale: #F5EDE0;
+  --charcoal: #1A1A1A;
+  --text: #3B3B3B;
+  --text-muted: #6E6E66;
+  --border: #E8E4DC;
+}
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-bg text-text font-body antialiased overflow-x-hidden;
+  }
+  ::selection {
+    background: var(--sage-pale);
+    color: var(--charcoal);
+  }
+  h1 {
+    @apply font-heading font-light text-charcoal leading-[1.1] tracking-[-0.03em];
+    font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+  }
+  h2 {
+    @apply font-heading font-light text-charcoal leading-[1.12] tracking-[-0.02em];
+    font-size: clamp(1.8rem, 4vw, 3rem);
+  }
+  h3 {
+    @apply font-heading font-normal text-charcoal tracking-[-0.01em];
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  }
+  /* C8 a11y: focus-visible для клавиатурной навигации */
+  :focus {
+    outline: none;
+  }
+  :focus-visible {
+    outline: 2px solid var(--sage);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto px-7;
+    max-width: var(--max-w-container, 1280px);
+  }
+  .tag {
+    @apply inline-block px-[18px] py-[7px] rounded-[30px] uppercase font-bold;
+    font-family: var(--font-jakarta), sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--sage);
+    background: linear-gradient(135deg, var(--sage-pale), var(--rose-pale));
+  }
+  .grad-line {
+    @apply w-20 h-[3px] rounded-[3px];
+    background: linear-gradient(90deg, var(--sage), var(--rose), var(--sage));
+    background-size: 200% 100%;
+    animation: gradientShift 4s ease infinite;
+  }
+  .btn-primary {
+    @apply inline-flex items-center gap-2 font-semibold text-white;
+    @apply px-[34px] py-4 rounded-pill cursor-pointer;
+    @apply transition-all duration-[400ms] ease-curve relative overflow-hidden;
+    font-family: var(--font-jakarta), sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    background: linear-gradient(135deg, var(--sage), var(--sage-deep));
+    box-shadow: 0 4px 24px rgba(124, 154, 124, 0.3);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 16px 48px rgba(124, 154, 124, 0.45);
+    transform: translateY(-3px);
+  }
+  .btn-outline {
+    @apply inline-flex items-center gap-2 font-semibold cursor-pointer;
+    @apply px-[34px] py-4 rounded-pill bg-transparent;
+    @apply transition-all duration-[400ms] ease-curve;
+    font-family: var(--font-jakarta), sans-serif;
+    font-size: 14px;
+    color: var(--sage);
+    border: 1.5px solid var(--sage-muted);
+  }
+  .btn-outline:hover {
+    background: var(--sage-pale);
+    border-color: var(--sage);
+    transform: translateY(-2px);
+  }
+  .btn-wa {
+    @apply inline-flex items-center gap-2 font-semibold text-white cursor-pointer;
+    @apply px-[34px] py-4 rounded-pill;
+    @apply transition-all duration-[400ms] ease-curve;
+    font-family: var(--font-jakarta), sans-serif;
+    font-size: 14px;
+    background: #25D366;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.25);
+  }
+  .btn-wa:hover {
+    box-shadow: 0 12px 40px rgba(37, 211, 102, 0.35);
+    transform: translateY(-3px);
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--sage);
+    color: white;
+    padding: 8px 16px;
+    z-index: 100000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 8px 0;
+  }
+  .skip-link:focus {
+    top: 0;
+  }
+}
+
+/* C8 a11y: prefers-reduced-motion — отключаем декоративные анимации */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
