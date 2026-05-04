@@ -123,4 +123,8 @@ export interface Dictionary {
   signsHeading: string;
   bookNow: string;
   whatIHelpWith: string;
+  allArticles: string;
+  readingMinutes: string;
+  whenReachOut: string;
+  blogDisclaimer: string;
 }

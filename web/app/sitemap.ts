@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/config';
 import { getAllIssueSlugs } from '@/lib/issues';
 import { TOOLS } from '@/lib/tools';
+import { POSTS } from '@/lib/blog';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -37,7 +38,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'monthly' as const,
   }));
 
-  return [...staticRoutes, ...issueRoutes, ...toolRoutes].map(({ path, priority, changeFrequency }) => ({
+  const blogRoutes = POSTS.map((p) => ({
+    path: `/blog/${p.slug}`,
+    priority: 0.7,
+    changeFrequency: 'monthly' as const,
+  }));
+
+  return [...staticRoutes, ...issueRoutes, ...toolRoutes, ...blogRoutes].map(({ path, priority, changeFrequency }) => ({
     url: `${SITE_URL}${path}`,
     lastModified: now,
     changeFrequency,

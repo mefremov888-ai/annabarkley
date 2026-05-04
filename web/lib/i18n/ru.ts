@@ -74,4 +74,8 @@ export const ru: Dictionary = {
   signsHeading: 'На что обратить внимание',
   bookNow: 'Записаться',
   whatIHelpWith: '← С чем я помогаю',
+  allArticles: '← Все статьи',
+  readingMinutes: 'мин чтения',
+  whenReachOut: 'Когда стоит обратиться',
+  blogDisclaimer: 'Статья носит информационный характер и не заменяет профессиональной консультации.',
 };

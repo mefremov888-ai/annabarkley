@@ -74,4 +74,8 @@ export const en: Dictionary = {
   signsHeading: 'Signs to look for',
   bookNow: 'Book Now',
   whatIHelpWith: '← What I Help With',
+  allArticles: '← All articles',
+  readingMinutes: 'min read',
+  whenReachOut: 'When to reach out',
+  blogDisclaimer: 'This article is for information only and does not replace professional consultation.',
 };
