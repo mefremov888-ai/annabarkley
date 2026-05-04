@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ISSUES, getAllIssueSlugs, getIssueBySlug } from '@/lib/issues';
+import { ogImage } from '@/lib/og';
 import { IssueDetail } from './IssueDetail';
 
 export function generateStaticParams() {
@@ -25,6 +26,11 @@ export function generateMetadata({ params }: Params): Metadata {
       title: `${issue.t.en} Therapy — Anna Barkley`,
       description: issue.metaDesc.en,
       url: `/issues/${issue.slug}`,
+      images: ogImage({ kind: 'issues', title: `${issue.t.en} support` }),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      images: ogImage({ kind: 'issues', title: `${issue.t.en} support` }),
     },
   };
 }

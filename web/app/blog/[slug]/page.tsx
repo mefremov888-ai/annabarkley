@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getAllPostSlugs, getPostBySlug } from '@/lib/blog';
 import { getPostContent } from '@/lib/blog-content';
 import { SITE_URL } from '@/lib/config';
+import { ogImage } from '@/lib/og';
 import { BlogArticle } from './BlogArticle';
 
 export function generateStaticParams() {
@@ -28,11 +29,13 @@ export function generateMetadata({ params }: Params): Metadata {
       url: `/blog/${meta.slug}`,
       type: 'article',
       publishedTime: meta.date,
+      images: ogImage({ kind: 'blog', title: meta.t.en, subtitle: meta.cat.en }),
     },
     twitter: {
       card: 'summary_large_image',
       title: meta.t.en,
       description: meta.metaDesc.en,
+      images: ogImage({ kind: 'blog', title: meta.t.en, subtitle: meta.cat.en }),
     },
   };
 }

@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import { WhatsAppFloat } from '@/components/ui/WhatsAppFloat';
 import { CookieBanner } from '@/components/ui/CookieBanner';
 import { AB_CONFIG, SITE_URL } from '@/lib/config';
+import { ogImage } from '@/lib/og';
 import './globals.css';
 
 // NOTE: Sora и Plus Jakarta Sans не имеют cyrillic subset.
@@ -46,6 +47,11 @@ export const metadata: Metadata = {
     siteName: 'Anna Barkley',
     locale: 'en_US',
     url: SITE_URL,
+    images: ogImage({ kind: 'default' }),
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ogImage({ kind: 'default' }),
   },
   robots: {
     index: true,
