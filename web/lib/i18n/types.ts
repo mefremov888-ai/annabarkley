@@ -120,6 +120,9 @@ export interface Dictionary {
   formError: string;
   formErrorRetry: string;
   bookViaCalendly: string;
+  pricingFinalBilling: string;
+  pricingApprox: string;
+  pricingNote: string;
   // Common
   bookFreeCall: string;
   chatOnWhatsApp: string;

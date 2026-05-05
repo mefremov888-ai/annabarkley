@@ -3,6 +3,7 @@ import { ContactForm } from '@/components/sections/ContactForm';
 import { ContactExtras } from '@/components/sections/ContactExtras';
 import { AB_CONFIG } from '@/lib/config';
 import { PageHeader } from '@/components/sections/PageHeader';
+import { MapEmbed } from '@/components/sections/MapEmbed';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -38,6 +39,10 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      <MapEmbed
+        heading={{ en: 'Visit the office', ru: 'Адрес кабинета' }}
+      />
     </>
   );
 }

@@ -7,6 +7,7 @@ import { useLang } from '@/lib/i18n/context';
 import { AB_CONFIG } from '@/lib/config';
 import { Logo } from '@/components/ui/Logo';
 import { LangToggle } from '@/components/ui/LangToggle';
+import { CurrencyToggle } from '@/components/ui/CurrencyToggle';
 import { MobileMenu } from './MobileMenu';
 
 const NAV_ROUTES = ['/', '/services', '/issues', '/pricing', '/contact'] as const;
@@ -60,6 +61,7 @@ export function Header() {
               );
             })}
             <LangToggle />
+            <CurrencyToggle />
             <a
               href={AB_CONFIG.WA_URL}
               target="_blank"

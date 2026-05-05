@@ -71,6 +71,9 @@ export const en: Dictionary = {
   formError: "Couldn't send your message",
   formErrorRetry: 'Please try again or message me on WhatsApp.',
   bookViaCalendly: 'Or book a slot directly',
+  pricingFinalBilling: 'final billing in AED',
+  pricingApprox: 'approx.',
+  pricingNote: 'Prices shown in your selected currency are for reference only. Final billing is always in AED.',
 
   bookFreeCall: 'Book Your Free Call',
   chatOnWhatsApp: 'Chat on WhatsApp',

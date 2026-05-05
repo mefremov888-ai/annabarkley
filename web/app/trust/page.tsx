@@ -3,6 +3,7 @@
 import { useLang } from '@/lib/i18n/context';
 import { AB_CONFIG } from '@/lib/config';
 import { PageHeader } from '@/components/sections/PageHeader';
+import { MapEmbed } from '@/components/sections/MapEmbed';
 
 const POINTS = {
   en: [
@@ -28,7 +29,7 @@ export default function TrustPage() {
   return (
     <>
       <PageHeader headingKey="trust" />
-      <section className="py-16 px-7 pb-32">
+      <section className="py-16 px-7 pb-12">
         <div className="container-x" style={{ maxWidth: '720px' }}>
           <ul className="flex flex-col gap-4 mb-12">
             {POINTS[lang].map((p) => (
@@ -50,6 +51,11 @@ export default function TrustPage() {
           </div>
         </div>
       </section>
+
+      <MapEmbed
+        heading={{ en: 'Office Location', ru: 'Где находится кабинет' }}
+        className="pb-32"
+      />
     </>
   );
 }

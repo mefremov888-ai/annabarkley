@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useLang } from '@/lib/i18n/context';
 import { AB_CONFIG } from '@/lib/config';
+import { trackEvent } from '@/lib/analytics';
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -50,11 +51,13 @@ export function ContactForm() {
       });
 
       if (res.ok) {
+        trackEvent('contact_submit', { who: String(data.who || ''), method: 'api' });
         setStatus('success');
         return;
       }
       // Сервер не сконфигурирован — мягко падаем на mailto.
       if (res.status === 501) {
+        trackEvent('contact_submit', { who: String(data.who || ''), method: 'mailto' });
         fallbackToMailto(data);
         setStatus('success');
         return;

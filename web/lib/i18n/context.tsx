@@ -1,7 +1,8 @@
 'use client';
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { defaultLang, dictionaries, isLang, supportedLangs } from './index';
+import { trackEvent } from '@/lib/analytics';
 import type { Dictionary, Lang } from './types';
 
 interface LangContextValue {
@@ -15,6 +16,7 @@ const LangContext = createContext<LangContextValue | null>(null);
 
 export function LangProvider({ children, initial }: { children: React.ReactNode; initial?: Lang }) {
   const [lang, setLangState] = useState<Lang>(initial ?? defaultLang);
+  const isHydrated = useRef(false);
 
   // Восстановить выбор языка из localStorage на клиенте
   useEffect(() => {
@@ -22,6 +24,7 @@ export function LangProvider({ children, initial }: { children: React.ReactNode;
       const stored = localStorage.getItem('ab_lang');
       if (isLang(stored) && stored !== lang) setLangState(stored);
     } catch {}
+    isHydrated.current = true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -35,6 +38,7 @@ export function LangProvider({ children, initial }: { children: React.ReactNode;
   const setLang = useCallback((l: Lang) => {
     setLangState(l);
     try { localStorage.setItem('ab_lang', l); } catch {}
+    if (isHydrated.current) trackEvent('language_change', { to: l });
   }, []);
 
   const toggleLang = useCallback(() => {

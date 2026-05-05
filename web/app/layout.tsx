@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import { Sora, Plus_Jakarta_Sans } from 'next/font/google';
 import { LangProvider } from '@/lib/i18n/context';
+import { CurrencyProvider } from '@/lib/currency/context';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { WhatsAppFloat } from '@/components/ui/WhatsAppFloat';
 import { CookieBanner } from '@/components/ui/CookieBanner';
+import { OutboundTracker } from '@/components/analytics/OutboundTracker';
 import { AB_CONFIG, SITE_URL } from '@/lib/config';
 import { ogImage } from '@/lib/og';
 import './globals.css';
@@ -94,13 +96,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <a href="#main" className="skip-link">Skip to main content</a>
         <LangProvider>
-          <Header />
-          <main id="main" role="main">
-            {children}
-          </main>
-          <Footer />
-          <WhatsAppFloat />
-          <CookieBanner />
+          <CurrencyProvider>
+            <Header />
+            <main id="main" role="main">
+              {children}
+            </main>
+            <Footer />
+            <WhatsAppFloat />
+            <CookieBanner />
+            <OutboundTracker />
+          </CurrencyProvider>
         </LangProvider>
       </body>
     </html>

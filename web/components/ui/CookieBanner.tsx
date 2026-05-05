@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useLang } from '@/lib/i18n/context';
-import { AB_CONFIG } from '@/lib/config';
+import { loadAnalytics } from '@/lib/analytics';
 
 type Consent = 'accept' | 'reject' | null;
 
@@ -16,26 +16,6 @@ function readConsent(): Consent {
 
 function writeConsent(v: Exclude<Consent, null>) {
   try { localStorage.setItem('cookie_consent', v); } catch {}
-}
-
-function loadAnalytics() {
-  if (typeof window === 'undefined') return;
-  if ((window as any).__abAnalyticsLoaded) return;
-  (window as any).__abAnalyticsLoaded = true;
-  if (!AB_CONFIG.GA4_ID) {
-    console.info('[analytics] GA4 ID not set — skipping');
-    return;
-  }
-  // GA4 загрузится только при наличии ID и accept
-  const s = document.createElement('script');
-  s.async = true;
-  s.src = `https://www.googletagmanager.com/gtag/js?id=${AB_CONFIG.GA4_ID}`;
-  document.head.appendChild(s);
-  (window as any).dataLayer = (window as any).dataLayer || [];
-  function gtag(...args: unknown[]) { (window as any).dataLayer.push(args); }
-  (window as any).gtag = gtag;
-  gtag('js', new Date());
-  gtag('config', AB_CONFIG.GA4_ID);
 }
 
 export function CookieBanner() {

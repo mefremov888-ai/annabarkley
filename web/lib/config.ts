@@ -28,9 +28,14 @@ export const AB_CONFIG = {
   BOOKING_URL: process.env.NEXT_PUBLIC_CALENDLY_URL || '',
   FORMS_ENDPOINT: process.env.NEXT_PUBLIC_FORMS_ENDPOINT || '',
   GA4_ID: process.env.NEXT_PUBLIC_GA4_ID || '',
+  YANDEX_METRIKA_ID: process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID || '',
 
   EXCHANGE_API: 'https://open.er-api.com/v6/latest/AED',
   EXCHANGE_TTL_MS: 24 * 60 * 60 * 1000,
+
+  // Координаты кабинета для карт (формат "lat,lng"). Без значения карта не рендерится.
+  OFFICE_COORDS: process.env.NEXT_PUBLIC_OFFICE_COORDS || '',
+  OFFICE_NAME: process.env.NEXT_PUBLIC_OFFICE_NAME || 'Anna Barkley — Psychologist',
 } as const;
 
 export function isReadyForLaunch(): boolean {

@@ -71,6 +71,9 @@ export const ru: Dictionary = {
   formError: 'Не удалось отправить сообщение',
   formErrorRetry: 'Попробуйте ещё раз или напишите мне в WhatsApp.',
   bookViaCalendly: 'Или выберите слот напрямую',
+  pricingFinalBilling: 'итоговая оплата в AED',
+  pricingApprox: '≈',
+  pricingNote: 'Цены в выбранной валюте — справочные. Итоговая оплата всегда в AED.',
 
   bookFreeCall: 'Записаться на бесплатный звонок',
   chatOnWhatsApp: 'Написать в WhatsApp',

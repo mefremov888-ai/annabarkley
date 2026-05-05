@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, type ReactNode } from 'react';
 import { AB_CONFIG } from '@/lib/config';
+import { trackEvent } from '@/lib/analytics';
 
 declare global {
   interface Window {
@@ -78,6 +79,7 @@ export function CalendlyButton({
 
   async function open() {
     setLoading(true);
+    trackEvent('book_call_click', { source: 'calendly_popup' });
     try {
       await ensureCalendlyLoaded();
       if (window.Calendly) {

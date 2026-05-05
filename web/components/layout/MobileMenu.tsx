@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { useLang } from '@/lib/i18n/context';
 import { LangToggle } from '@/components/ui/LangToggle';
+import { CurrencyToggle } from '@/components/ui/CurrencyToggle';
 
 const MOBILE_ROUTES = [
   '/',
@@ -45,8 +46,9 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
           {t.navMobile[i]}
         </Link>
       ))}
-      <div className="mt-5">
+      <div className="mt-5 flex flex-col items-center gap-3">
         <LangToggle scale={1.3} />
+        <CurrencyToggle scale={1.15} />
       </div>
     </div>
   );
