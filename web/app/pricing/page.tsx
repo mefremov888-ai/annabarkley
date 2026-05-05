@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useLang } from '@/lib/i18n/context';
 import { PageHeader } from '@/components/sections/PageHeader';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
+import { CalendlyButton } from '@/components/ui/CalendlyButton';
+import { AB_CONFIG } from '@/lib/config';
 
 const PACKAGES = {
   en: [
@@ -60,7 +62,13 @@ export default function PricingPage() {
                       </li>
                     ))}
                   </ul>
-                  <Link href="/contact" className="btn-primary w-full justify-center">{t.bookNow}</Link>
+                  {AB_CONFIG.BOOKING_URL ? (
+                    <CalendlyButton className="btn-primary w-full justify-center" ariaLabel={t.bookNow}>
+                      {t.bookNow}
+                    </CalendlyButton>
+                  ) : (
+                    <Link href="/contact" className="btn-primary w-full justify-center">{t.bookNow}</Link>
+                  )}
                 </article>
               </RevealOnScroll>
             ))}

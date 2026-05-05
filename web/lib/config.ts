@@ -23,7 +23,9 @@ export const AB_CONFIG = {
   DHA_CLASSIFICATION: '__BLOCK_LAUNCH:DHA_CLASS__', // PLACEHOLDER
 
   // Сторонние
-  BOOKING_URL: 'https://calendly.com/annabarkley', // PLACEHOLDER
+  // BOOKING_URL пуст пока не задан NEXT_PUBLIC_CALENDLY_URL → CalendlyButton
+  // деградирует до ссылки на /contact.
+  BOOKING_URL: process.env.NEXT_PUBLIC_CALENDLY_URL || '',
   FORMS_ENDPOINT: process.env.NEXT_PUBLIC_FORMS_ENDPOINT || '',
   GA4_ID: process.env.NEXT_PUBLIC_GA4_ID || '',
 

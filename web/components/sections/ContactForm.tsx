@@ -4,12 +4,31 @@ import { useState } from 'react';
 import { useLang } from '@/lib/i18n/context';
 import { AB_CONFIG } from '@/lib/config';
 
+type Status = 'idle' | 'submitting' | 'success' | 'error';
+
 export function ContactForm() {
-  const { t, lang } = useLang();
-  const [submitted, setSubmitted] = useState(false);
+  const { t } = useLang();
+  const [status, setStatus] = useState<Status>('idle');
   const [whoIsFor, setWhoIsFor] = useState('');
 
   const isMinor = whoIsFor === t.formWhoOptions[1] || whoIsFor === t.formWhoOptions[2];
+
+  function fallbackToMailto(data: Record<string, FormDataEntryValue>) {
+    const subj = encodeURIComponent(`New consultation request — ${data.name}`);
+    const body = encodeURIComponent(
+      [
+        `Name: ${data.name}`,
+        `Email: ${data.email}`,
+        `Phone: ${data.phone || ''}`,
+        `For: ${data.who || ''}`,
+        `Parent consent: ${data.parent_consent === 'on' ? 'yes' : 'n/a'}`,
+        '',
+        'Message:',
+        String(data.message || ''),
+      ].join('\n'),
+    );
+    window.location.href = `mailto:${AB_CONFIG.EMAIL}?subject=${subj}&body=${body}`;
+  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,37 +39,34 @@ export function ContactForm() {
     }
     const fd = new FormData(form);
     const data = Object.fromEntries(fd.entries());
+    setStatus('submitting');
+
     try {
-      if (AB_CONFIG.FORMS_ENDPOINT) {
-        await fetch(AB_CONFIG.FORMS_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ type: 'contact', ...data }),
-        });
-      } else {
-        const subj = encodeURIComponent(`New consultation request — ${data.name}`);
-        const body = encodeURIComponent(
-          [
-            `Name: ${data.name}`,
-            `Email: ${data.email}`,
-            `Phone: ${data.phone || ''}`,
-            `For: ${data.who || ''}`,
-            `Parent consent: ${data.parent_consent === 'on' ? 'yes' : 'n/a'}`,
-            '',
-            'Message:',
-            String(data.message || ''),
-          ].join('\n')
-        );
-        window.location.href = `mailto:${AB_CONFIG.EMAIL}?subject=${subj}&body=${body}`;
+      const endpoint = AB_CONFIG.FORMS_ENDPOINT || '/api/contact';
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ type: 'contact', ...data }),
+      });
+
+      if (res.ok) {
+        setStatus('success');
+        return;
       }
-      setSubmitted(true);
+      // Сервер не сконфигурирован — мягко падаем на mailto.
+      if (res.status === 501) {
+        fallbackToMailto(data);
+        setStatus('success');
+        return;
+      }
+      setStatus('error');
     } catch (err) {
       console.warn('Form submit failed', err);
-      setSubmitted(true);
+      setStatus('error');
     }
   }
 
-  if (submitted) {
+  if (status === 'success') {
     return (
       <div role="status" aria-live="polite" className="text-center py-12 px-8">
         <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" strokeWidth="1.5" strokeLinecap="round" className="mx-auto mb-5" aria-hidden="true">
@@ -64,8 +80,20 @@ export function ContactForm() {
     );
   }
 
+  const submitting = status === 'submitting';
+
   return (
     <form onSubmit={onSubmit} noValidate className="grid gap-4">
+      {/* Honeypot — скрытое поле для ботов. Не показываем людям. */}
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+      />
+
       <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
         <div>
           <label htmlFor="cf-name" className="block text-[12px] font-semibold text-charcoal mb-2">
@@ -105,8 +133,22 @@ export function ContactForm() {
         </label>
       )}
 
-      <button type="submit" className="btn-primary justify-center w-full mt-2" style={{ padding: '20px 44px', fontSize: '16px' }}>
-        {t.formSubmit}
+      {status === 'error' && (
+        <div role="alert" className="rounded-2xl border border-rose-deep/40 bg-rose-pale/40 p-4 text-[14px] text-charcoal">
+          <strong className="block mb-1">{t.formError}</strong>
+          <span className="font-light">{t.formErrorRetry}</span>
+          <a href={AB_CONFIG.WA_URL} target="_blank" rel="noopener noreferrer" className="btn-wa mt-3 inline-flex" aria-label={t.chatOnWhatsApp}>{t.chatOnWhatsApp}</a>
+        </div>
+      )}
+
+      <button
+        type="submit"
+        disabled={submitting}
+        aria-busy={submitting}
+        className="btn-primary justify-center w-full mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+        style={{ padding: '20px 44px', fontSize: '16px' }}
+      >
+        {submitting ? t.formSubmitting : t.formSubmit}
       </button>
     </form>
   );

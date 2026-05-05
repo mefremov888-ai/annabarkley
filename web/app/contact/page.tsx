@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { ContactForm } from '@/components/sections/ContactForm';
+import { ContactExtras } from '@/components/sections/ContactExtras';
 import { AB_CONFIG } from '@/lib/config';
 import { PageHeader } from '@/components/sections/PageHeader';
 
@@ -26,7 +27,8 @@ export default function ContactPage() {
             <ContactForm />
           </div>
 
-          <div className="grid grid-cols-2 gap-4 mt-8 max-md:grid-cols-1">
+          <ContactExtras />
+          <div className="grid grid-cols-2 gap-4 mt-4 max-md:grid-cols-1">
             <a href={AB_CONFIG.WA_URL} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" className="btn-wa justify-center">
               WhatsApp
             </a>

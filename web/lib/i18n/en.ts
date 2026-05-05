@@ -67,6 +67,10 @@ export const en: Dictionary = {
   formOk: 'Thank you for reaching out',
   formOkP: "I'll respond within 24 hours. For urgent matters, message me on WhatsApp.",
   formParentConsent: 'I confirm I am the parent or legal guardian and consent to therapy services for this minor.',
+  formSubmitting: 'Sending…',
+  formError: "Couldn't send your message",
+  formErrorRetry: 'Please try again or message me on WhatsApp.',
+  bookViaCalendly: 'Or book a slot directly',
 
   bookFreeCall: 'Book Your Free Call',
   chatOnWhatsApp: 'Chat on WhatsApp',

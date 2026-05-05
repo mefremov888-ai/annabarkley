@@ -116,6 +116,10 @@ export interface Dictionary {
   formOk: string;
   formOkP: string;
   formParentConsent: string;
+  formSubmitting: string;
+  formError: string;
+  formErrorRetry: string;
+  bookViaCalendly: string;
   // Common
   bookFreeCall: string;
   chatOnWhatsApp: string;
